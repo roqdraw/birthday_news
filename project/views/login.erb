@@ -1,0 +1,13 @@
+<%unless logged_in?%>
+
+<form action="/session" method="post">
+  <label>email:</label>
+  <input name="email"/>
+  <label>password:<label>
+  <input name="password"/>
+  <button>Log in</button>
+  <p>Aren't you a member with us yet?</p>
+  <p>click <a href="/sign_up">here</a> to join in!</p>
+</form>
+
+<%end%>
