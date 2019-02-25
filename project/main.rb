@@ -1,11 +1,9 @@
-     
 require 'sinatra'
 require 'sinatra/reloader'
 require 'pg'
 require_relative 'db_config'
 require_relative 'models/bookmark'
 require_relative 'models/user'
-
 
 enable :sessions
 
@@ -19,7 +17,6 @@ get '/sign_up' do
 end
 
 post '/sign_up' do
-
   user = User.new
   user.firstname = params[:firstname]
   user.lastname = params[:lastname]
@@ -30,8 +27,3 @@ post '/sign_up' do
 
   redirect '/'
 end
-
-
-
-
-
