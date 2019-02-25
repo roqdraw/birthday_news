@@ -13,11 +13,24 @@ get '/' do
   erb :index
 end
 
+get '/sign_up' do
 
-get '/session/new'
-
-erb :login
+  erb :signup
 end
+
+post '/sign_up' do
+
+  user = User.new
+  user.firstname = params[:firstname]
+  user.lastname = params[:lastname]
+  user.birthdate = params[:birthdate]
+  user.email = params[:email]
+  user.password = params[:password]
+  user.save
+
+  redirect '/'
+end
+
 
 
 
