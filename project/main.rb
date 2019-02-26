@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'sinatra/reloader'
+require 'httparty'
 require 'pg'
 require_relative 'db_config'
 require_relative 'models/bookmark'
@@ -19,6 +20,9 @@ helpers do
   end
 end
 
+get '/articles' do
+  erb :articles
+end
 
 get '/' do
   erb :index
@@ -26,6 +30,10 @@ end
 
 get '/sign_up' do
     erb :signup
+end
+
+get '/about' do
+  erb :about
 end
 
 post '/session' do

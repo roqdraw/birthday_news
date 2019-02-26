@@ -1,0 +1,47 @@
+<%# <h2>Get your news articles!</h2>
+
+<form action="/articles" method="post">
+<input type="hidden" name="_method" value="">
+
+<button>USER BIRTHDATE</button>
+</form>
+
+
+<h2>Choose other date</h2>
+<form action="/articles" post="post">
+    <input type="text" placeholder="YYYY-MM-DD">
+    <button>Search</button>
+</form> %>
+
+<div class="article_container">
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+    
+    var birthYear = 1992
+    var date = new Date();
+    var currentYear = date.getFullYear(); //(2019)
+    var yearDifference = currentYear - birthYear //(27)
+
+    var continuousLoop = res => {
+        while (yearDifference > 0) {
+            res.response.docs.forEach(res => console.log(res.headline.main))
+            
+            yearDifference -= 1;
+        }
+    }
+
+    var consoleLogFirst = res => {
+        console.log(res.response.docs[0]);
+    }
+
+    var options = {
+        url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${birthYear}-01-01&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`
+    };
+
+    $.ajax(options).done(consoleLogFirst)
+    // $.ajax(options).done(continuousLoop)
+
+</script>
