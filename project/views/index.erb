@@ -1,10 +1,10 @@
-<h1>Birthday News</h1>
-
+<div class="index">
 <p>Hello! Welcome to Birthday News.</p>
 <p>A website where you can view articles that were published on your birthday dating back to your year of birth.</p>
-
+</div>
 
 <%if logged_in? %>
+<script src="/javascripts/options.js"></script>
 <a href="/articles">Search articles based on my Birthday</a>
 <div class="chooseDate">
   <form action="/articles">
@@ -19,5 +19,3 @@
 <h2><a href="/log_in">Log In</a></h2>
 <h2><a href="/sign_up">Sign Up</a></h2>
 <%end%>
-
-<script src="/javascripts/options.js"></script>

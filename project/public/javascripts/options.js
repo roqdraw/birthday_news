@@ -44,6 +44,7 @@ var makeDayOptions = (e) => {
   }
 }
 
+console.log('years', years)
 years.addEventListener("change", makeDayOptions)
 
 months.addEventListener('change', makeDayOptions)
