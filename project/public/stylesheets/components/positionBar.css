@@ -1,0 +1,13 @@
+.banner {
+  position: relative;
+}
+
+.menu_list {
+  position: absolute;
+  left: 0;
+}
+
+.user_setting {
+  position: absolute;
+  right: 0;
+}

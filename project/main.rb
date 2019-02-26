@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'sinatra/reloader'
+require 'httparty'
 require 'pg'
 require_relative 'db_config'
 require_relative 'models/bookmark'
@@ -19,13 +20,12 @@ helpers do
   end
 end
 
-
 get '/' do
   erb :index
 end
 
-get '/sign_up' do
-    erb :signup
+get '/about' do
+  erb :about
 end
 
 post '/session' do
@@ -54,11 +54,16 @@ post '/sign_up' do
   redirect '/'
 end
 
-get '/about' do
-  erb :about
+get '/sign_up' do
+  erb :signup
 end
 
-get '/articles' do 
+get '/signout' do 
+session[:user_id] = nil
+redirect '/'
+end
+
+get '/articles' do
   erb :articles
 end
 
@@ -66,4 +71,13 @@ get '/user' do
   if logged_in?
     erb :user_id
   end
+end
+
+get '/articles_list' do
+  erb :articles_list
+end
+
+get '/user/edit' do
+  @user = User.find_by(current_user)
+  erb :edit
 end

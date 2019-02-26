@@ -10,14 +10,35 @@
   <div class="banner">
     <i class="menu fas fa-bars fa-2x"></i>
     <h1>Birthday News</h1>
-    <i class="fas fa-user-circle fa-2x"></i>
+    <div>
+      <%if logged_in? %>
+      <span><%=current_user.firstname%></span>
+      <%else%>
+      <span>hello, stranger!</span>
+      <%end%>
+      <i class="user fas fa-user-circle fa-2x"></i>
+    </div>
   </div>
-  <div class="content">
-    <ul class="menu_list hidden">
-      <a href="/"><li>Home</li></a>
-      <a href="/about"><li>about</li></a>
-    </ul>
-    <%= yield %>
+  <div class="content_wrapper">
+    <div class="menu_list hidden">
+      <ul>
+        <a href="/"><li>Home</li></a>
+        <a href="/about"><li>about</li></a>
+      </ul>
+    </div>
+    <%if logged_in? %>
+    <div class="user_setting hidden">
+      <ul>
+        <a href="/user"><li>My profile</li></a>
+        <a href="/articles/bookmarks"><li>My Bookmarks</li></a>
+        <a href="/user/edit"><li>Edit profile</li></a>
+        <a href="/signout"><li>Sign out</li></a>
+      </ul>
+    </div>
+    <%end%>
+    <div class="content">
+     <%= yield %>
+    </div>
   </div>
 </body>
   <script src="/javascripts/application.js"></script>

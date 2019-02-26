@@ -1,0 +1,27 @@
+ul {
+  padding-left: 0;
+  margin: 0;
+}
+
+.user_setting {
+  border: 1px solid black;
+}
+
+.menu_list {
+  background-color: rgb(247, 210, 186);
+  height: 100vh;
+}
+
+
+.user_setting a, .menu_list a{
+  text-decoration: none;
+}
+
+.user_setting li, .menu_list li {
+  list-style: none;
+  padding: 10px;
+}
+
+.user_setting li:hover, .menu_list li:hover{
+  background-color: bisque;
+}

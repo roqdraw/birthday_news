@@ -1,3 +1,8 @@
+@import "/stylesheets/components/positionBar.css";
+@import "/stylesheets/components/list.css";
+@import "/stylesheets/pages/index.css";
+@import "/stylesheets/pages/signup.css";
+@import "/stylesheets/components/button.css";
 
 
 body {
@@ -9,15 +14,24 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: orange;
+  background-color: rgb(247, 210, 186);
 }
 
 .banner h1 {
   margin: 0;
 }
 
-.content {
+.content_wrapper {
   padding: 10px;
+  padding-top: 0;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  flex: 1;
+  margin-top: 20px;
 }
 
 .hidden {
