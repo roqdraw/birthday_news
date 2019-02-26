@@ -1,7 +1,9 @@
 <% if logged_in? %>
-  <p> <%= current_user.firstname %> </p>
-  <p> <%= current_user.lastname %> </p>
-  <p> <%= current_user.birthdate %> </p>
+  <p> <%= "First Name: #{current_user.firstname}" %> </p>
+  <p> <%= "Last Name: #{current_user.lastname}" %> </p>
+  <% pub_date = "#{current_user.birth_year}-#{current_user.birth_month}-#{current_user.birth_day}"%>
+  <p><%= "Birth Date: #{pub_date}" %></p>
+
 
   <h3>Frequent Categories</h3>
 
@@ -29,7 +31,7 @@
   var searchResult = {};
   
     var sections = {
-      url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=pub_date:(${2005-04-08})&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`
+      url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=pub_date:(<%=pub_date%>)&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`
     }
 
     $.ajax(sections).done( res => {

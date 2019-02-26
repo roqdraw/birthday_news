@@ -70,8 +70,9 @@ get '/articles' do
 end
 
 get '/user' do
+
   if logged_in?
-    erb :user_id
+    erb :user_show
   end
 end
 
