@@ -61,3 +61,9 @@ end
 get '/articles' do 
   erb :articles
 end
+
+get '/user' do
+  if logged_in?
+    erb :user_id
+  end
+end

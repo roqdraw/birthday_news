@@ -1,0 +1,77 @@
+<% if logged_in? %>
+  <p> <%= current_user.firstname %> </p>
+  <p> <%= current_user.lastname %> </p>
+  <p> <%= current_user.birthdate %> </p>
+
+  <h3>Frequent Categories</h3>
+  <ul class="categories">
+    <li class="item">Sport</li>
+    <li class="item">Business</li>
+    <li class="item">Arts</li>
+    <li class="item">World</li>
+    <li class="item">Health</li>
+  </ul>
+
+  <h3>Bookmarked Articles</h3>
+
+
+<% end %>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+
+
+var items = document.querySelectorAll('.item');
+
+  var item_arr = [];
+  var date = 1990-01-01
+
+  items.forEach( item => {
+    item_arr.push(item.textContent)
+  })
+
+  console.log(item_arr)
+
+
+var sortedSectionName = [];
+item_arr.forEach( res => {
+
+  var sections = {
+    url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${res}&fq=pub_date:(${1992-02-09})&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`
+  }
+
+  $.ajax(sections).done( res => {
+    res.response.docs.forEach(res => sortedSectionName.push(res.section_name))
+
+    var healthCount = sortedSectionName.filter( res => res.includes("Health")).length
+    var businessCount = sortedSectionName.filter( res => res.includes("Business")).length
+    var sportCount = sortedSectionName.filter( res => res.includes("Sport")).length
+    var ArtsCount = sortedSectionName.filter( res => res.includes("Arts")).length
+
+    var arr = [healthCount, businessCount, sportCount, ArtsCount]
+
+    var reducer = (acc, curr) => acc + curr;
+    var sum = arr.reduce(reducer, 0);
+
+    var worldCount = sortedSectionName.length - sum 
+    
+
+  })
+
+})
+
+
+// var reducer = (acc, curr) => acc + curr;
+
+// var arr = []
+// arr.push(healthCount)
+
+// var sum = arr.reduce(reducer, 0);
+// console.log(sum)
+
+
+
+</script>
+
