@@ -1,5 +1,16 @@
-var menu = document.querySelector('.menu')
-var list = document.querySelector('.menu_list')
+const menu = document.querySelector('.menu')
+const list = document.querySelector('.menu_list')
+const user = document.querySelector('.user')
+const userSetting = document.querySelector('.user_setting')
+
+function showUserSetting(e) {
+  if(userSetting.classList.contains('hidden')) {
+    userSetting.classList.remove('hidden')
+  } else {
+    userSetting.classList.add('hidden')
+  }
+}
+
 
 function showMenu(e) {
   if(list.classList.contains('hidden')) {
@@ -10,5 +21,5 @@ function showMenu(e) {
   
 }
 
-
+user.addEventListener('click', showUserSetting)
 menu.addEventListener('click', showMenu)

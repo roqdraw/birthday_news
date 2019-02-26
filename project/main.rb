@@ -73,3 +73,8 @@ end
 get '/articles' do 
   erb :articles
 end
+
+get '/signout' do 
+  session[:user_id] = nil
+  redirect '/'
+end

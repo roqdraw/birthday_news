@@ -1,0 +1,16 @@
+ul {
+  padding-left: 0;
+}
+
+.user_setting a, .menu_list a{
+  text-decoration: none;
+}
+
+.user_setting li, .menu_list li {
+  list-style: none;
+  padding: 3px;
+}
+
+.user_setting li:hover, .menu_list li:hover{
+  background-color: bisque;
+}
