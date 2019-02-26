@@ -24,6 +24,10 @@ get '/articles' do
   erb :articles
 end
 
+get '/articles_list' do
+  erb :articles_list
+end
+
 get '/' do
   erb :index
 end
