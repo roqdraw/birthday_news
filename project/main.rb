@@ -1,4 +1,3 @@
-     
 require 'sinatra'
 require 'sinatra/reloader'
 require 'pg'
@@ -6,7 +5,6 @@ require_relative 'db_config'
 require_relative 'models/bookmark'
 require_relative 'models/user'
 enable :sessions
-
 
 helpers do
   def current_user
@@ -21,10 +19,14 @@ helpers do
   end
 end
 
+
 get '/' do
   erb :index
 end
 
+get '/sign_up' do
+    erb :signup
+end
 
 post '/session' do
   user = User.find_by(email: params["email"])
@@ -36,11 +38,18 @@ post '/session' do
   end
 end
 
-
 get '/log_in' do
   erb :login
 end
 
+post '/sign_up' do
+  user = User.new
+  user.firstname = params[:firstname]
+  user.lastname = params[:lastname]
+  user.birthdate = params[:birthdate]
+  user.email = params[:email]
+  user.password = params[:password]
+  user.save
 
-
-
+  redirect '/'
+end
