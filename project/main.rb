@@ -53,3 +53,11 @@ post '/sign_up' do
 
   redirect '/'
 end
+
+get '/about' do
+  erb :about
+end
+
+get '/articles' do 
+  erb :articles
+end
