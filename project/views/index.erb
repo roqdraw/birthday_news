@@ -7,11 +7,11 @@
 <%if logged_in? %>
 <a href="/articles">Search articles based on my Birthday</a>
 <div class="chooseDate">
-  <form action="">
+  <form action="/articles">
     <p>For someone else? Enter the date</p>
-    <select id="years"></select>
-    <select id="months"></select>
-    <select id="days"></select>
+    <select name="year" id="years"></select>
+    <select name="month" id="months"></select>
+    <select name="day" id="days"></select>
    <button>go</button>
   </form>
 </div>
