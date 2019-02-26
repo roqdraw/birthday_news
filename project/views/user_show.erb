@@ -1,9 +1,10 @@
 <% if logged_in? %>
-  <p> <%= "First Name: #{current_user.firstname}" %> </p>
-  <p> <%= "Last Name: #{current_user.lastname}" %> </p>
-  <% pub_date = "#{current_user.birth_year}-#{current_user.birth_month}-#{current_user.birth_day}"%>
-  <p><%= "Birth Date: #{pub_date}" %></p>
-
+  <div class="userDetail">
+    <p class="firstName"> <% "First Name: #{current_user.firstname}" %> </p>
+    <p class="lastName"> <% "Last Name: #{current_user.lastname}" %> </p>
+    <% pub_date = "#{current_user.birth_year}-#{current_user.birth_month}-#{current_user.birth_day}"%>
+    <p class="birthDate"><% "Birth Date: #{pub_date}" %></p>
+  </div>
 
   <h3>Frequent Categories</h3>
 
@@ -11,16 +12,13 @@
   </ul>
 
   <h3><a href="/articles/bookmarks"> Bookmarked Articles</h3>
-
-
 <% end %>
 
-
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
 <script>
 
  var appendCategory = (name, count) => {
+
     var newUnorderedList = document.querySelector('.categories');
     var newLi = document.createElement('li')
     newLi.textContent = `${name} (${count})`;
@@ -36,20 +34,29 @@
 
     $.ajax(sections).done( res => {
       res.response.docs.forEach(doc => {
-        if(searchResult[doc.section_name]) {
+        if (searchResult[doc.section_name]) {
           searchResult[doc.section_name].push(doc);
         } else {
           searchResult[doc.section_name] = [doc];
         }
+        
+        var firstNamePtag = document.querySelector('.firstName')
+        var lastNamePtag = document.querySelector('.lastName')
+        var birthDatePtag = document.querySelector('.birthDate')
+
+        firstNamePtag.textContent = `First Name: <%= current_user.firstname %> `
+        lastNamePtag.textContent = `Last Name: <%= current_user.lastname %>`
+        birthDatePtag.textContent = `Birth Date: <%= pub_date %>`
+
       })
       
       var topFiveCats = Object.keys(searchResult).map( k => {
         return {count: searchResult[k].length, name: k };
       }).sort((a, b) => b.count - a.count).slice(0,5);
       topFiveCats.forEach( hash => {
-        appendCategory(hash.name, hash.count);   
-        console.log(appendCategory)    
+        appendCategory(hash.name, hash.count);      
       });
+
     });
 
 </script>
