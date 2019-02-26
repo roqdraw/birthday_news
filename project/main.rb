@@ -20,20 +20,8 @@ helpers do
   end
 end
 
-get '/articles' do
-  erb :articles
-end
-
-get '/articles_list' do
-  erb :articles_list
-end
-
 get '/' do
   erb :index
-end
-
-get '/sign_up' do
-    erb :signup
 end
 
 get '/about' do
@@ -66,15 +54,26 @@ post '/sign_up' do
   redirect '/'
 end
 
-get '/about' do
-  erb :about
-end
-
-get '/articles' do 
-  erb :articles
+get '/sign_up' do
+  erb :signup
 end
 
 get '/signout' do 
-  session[:user_id] = nil
-  redirect '/'
+session[:user_id] = nil
+redirect '/'
+end
+
+get '/articles' do
+  erb :articles
+end
+
+get '/articles_list' do
+  erb :articles_list
+end
+
+
+get '/user/edit' do
+  @user = User.find_by(current_user)
+  erb :edit
+
 end

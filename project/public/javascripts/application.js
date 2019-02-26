@@ -20,6 +20,11 @@ function showMenu(e) {
   }
   
 }
+console.log(userSetting)
 
-user.addEventListener('click', showUserSetting)
+
+if(userSetting !== null) {
+  user.addEventListener('click', showUserSetting)
+}
 menu.addEventListener('click', showMenu)
+
