@@ -1,4 +1,3 @@
-
 var years = document.querySelector('#years')
 var months = document.querySelector('#months')
 var days = document.querySelector('#days')
@@ -24,6 +23,12 @@ function makeOptions(years, months) {
       var options = document.createElement('option')
       options.textContent = monthValues[j]
       months.appendChild(options)
+    }
+    
+    for (let e = 1; e <= 31; e++) {
+      var option = document.createElement('option')
+      option.textContent = e
+      days.appendChild(option)
     }
 };
 

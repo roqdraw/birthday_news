@@ -1,4 +1,5 @@
-
+@import "/stylesheets/components/positionBar.css";
+@import "/stylesheets/components/list.css";
 
 body {
   margin: 0;
@@ -18,6 +19,7 @@ body {
 
 .content {
   padding: 10px;
+  text-align: center;
 }
 
 .hidden {
