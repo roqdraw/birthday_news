@@ -1,28 +1,32 @@
-<form action="/user" method="post">
-
-<label for="">firstname</label>
-<input name="firstname" type="text" value="<%=@user.firstname%>"/>
-
-<label for="">lastname</label>
-<input name="lastname" type="text" value="<%=@user.lastname%>"/>
-
-<label for="">year</label>
-<input name="birthdate" type="text" value="<%=@user.birth_year%>"/>
-
-
-<label for="">month</label>
-<input name="birthdate" type="text" value="<%=@user.birth_month%>"/>
-
-
-<label for="">day</label>
-<input name="birthdate" type="text" value="<%=@user.birth_day%>"/>
-
-<label for="">email</label>
-<input name="email" type="text" value="<%=@user.email%>"/>
-
-<label for="">password</label>
-<input name="password" type="text"/>
-
-<button>submit</button>
+<form class="edit" action="/user" method="post">
+  <div>
+    <label for="">firstname</label>
+    <input name="firstname" type="text" value="<%=@user.firstname%>"/>
+  </div>
+  <div>
+    <label for="">lastname</label>
+    <input name="lastname" type="text" value="<%=@user.lastname%>"/>
+  </div>
+  <div>
+    <label for="">year</label>
+    <input name="birthdate" type="text" value="<%=@user.birth_year%>"/>
+  </div>
+  <div>
+    <label for="">month</label>
+    <input name="birthdate" type="text" value="<%=@user.birth_month%>"/>
+  </div>
+  <div>
+    <label for="">day</label>
+    <input name="birthdate" type="text" value="<%=@user.birth_day%>"/>
+  </div>
+  <div>
+    <label for="">email</label>
+    <input name="email" type="text" value="<%=@user.email%>"/>
+  </div>
+  <div>
+    <label for="">password</label>
+    <input name="password" type="text"/>
+  </div>
+  <button>submit</button>
 
 </form>
