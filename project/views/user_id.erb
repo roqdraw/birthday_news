@@ -6,13 +6,6 @@
   <h3>Frequent Categories</h3>
 
   <ul class="categories">
-    <li class="item">sport<span id="sports"></span></li>
-    <li class="item">business<span id="business"></span></li>
-    <li class="item">arts<span id="arts"></span></li>
-    <li class="item">health<span id="healths"></span></li>
-    <li class="item">world<span id="world"></span></li>
-    <li class="item">movies<span id="movies"></span></li>
-    
   </ul>
 
   <h3><a href="/articles/bookmarks"> Bookmarked Articles</h3>
@@ -25,66 +18,37 @@
 
 <script>
 
-
-
-
-  var items = document.querySelectorAll('.item');
-
-    var item_arr = [];
-    // var date = 1990-01-01
-
-    items.forEach( item => {
-      item_arr.push(item.textContent)
-    })
-
-    console.log(item_arr)
-
+ var appendCategory = (name, count) => {
+    var newUnorderedList = document.querySelector('.categories');
+    var newLi = document.createElement('li')
+    newLi.textContent = `${name} (${count})`;
+    newUnorderedList.appendChild(newLi)
+  }
 
   var sortedSectionName = [];
-  item_arr.forEach( res => {
-
+  var searchResult = {};
+  
     var sections = {
-      url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${res}&fq=pub_date:(${1992-01-09})&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`
+      url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=pub_date:(${2005-04-08})&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`
     }
 
     $.ajax(sections).done( res => {
-      res.response.docs.forEach(res => sortedSectionName.push(res.section_name))
-
-      var healthCount = sortedSectionName.filter( sectionName => sectionName.includes("Health")).length
-      var businessCount = sortedSectionName.filter( sectionName => sectionName.includes("Business")).length
-      var sportCount = sortedSectionName.filter( sectionName => sectionName.includes("Sports")).length
-      var artsCount = sortedSectionName.filter( sectionName => sectionName.includes("Arts")).length
-      var worldCount = sortedSectionName.filter( sectionName => sectionName.includes("World")).length
-      var movieCount = sortedSectionName.filter( sectionName => sectionName.includes("Movie")).length
-      
-    
-    // var arr = [ healthCount , businessCount, sportCount, artsCount, worldCount, movieCount]
-
-    var results = [
-      { category: "health", count: 15 },
-      { category: "sports", count: 12 },
-      { category: "arts", count: 7 }
-    ]
-
-      var sorted_biggest_nums = results.sort((a, b) => b - a);
-      console.log(sorted_biggest_nums)
-
-         document.querySelector('#healths').textContent = healthCount;
-         document.querySelector('#business').textContent = businessCount;
-         document.querySelector('#sports').textContent = sportCount;
-         document.querySelector('#arts').textContent = artsCount;
-         document.querySelector('#world').textContent = worldCount;
-         document.querySelector('#movies').textContent = movieCount;
-
+      res.response.docs.forEach(doc => {
+        if(searchResult[doc.section_name]) {
+          searchResult[doc.section_name].push(doc);
+        } else {
+          searchResult[doc.section_name] = [doc];
+        }
       })
       
-    })
-
-
-
-
-
-
+      var topFiveCats = Object.keys(searchResult).map( k => {
+        return {count: searchResult[k].length, name: k };
+      }).sort((a, b) => b.count - a.count).slice(0,5);
+      topFiveCats.forEach( hash => {
+        appendCategory(hash.name, hash.count);   
+        console.log(appendCategory)    
+      });
+    });
 
 </script>
 
