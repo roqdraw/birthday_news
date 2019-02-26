@@ -1,7 +1,8 @@
+
+
 body {
   margin: 0;
 }
-
 
 .banner {
   padding: 10px;
@@ -11,10 +12,18 @@ body {
   background-color: orange;
 }
 
-h1 {
+.banner h1 {
   margin: 0;
 }
 
 .content {
   padding: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+i:hover {
+  cursor: pointer;
 }
