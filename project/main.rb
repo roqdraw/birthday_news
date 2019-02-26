@@ -69,13 +69,18 @@ get '/articles' do
   erb :articles
 end
 
+get '/user' do
+
+  if logged_in?
+    erb :user_show
+  end
+end
+
 get '/articles_list' do
   erb :articles_list
 end
 
-
 get '/user/edit' do
   @user = User.find_by(id: current_user.id)
   erb :edit
-
 end

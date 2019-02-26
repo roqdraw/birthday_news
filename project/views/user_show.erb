@@ -1,0 +1,56 @@
+<% if logged_in? %>
+  <p> <%= "First Name: #{current_user.firstname}" %> </p>
+  <p> <%= "Last Name: #{current_user.lastname}" %> </p>
+  <% pub_date = "#{current_user.birth_year}-#{current_user.birth_month}-#{current_user.birth_day}"%>
+  <p><%= "Birth Date: #{pub_date}" %></p>
+
+
+  <h3>Frequent Categories</h3>
+
+  <ul class="categories">
+  </ul>
+
+  <h3><a href="/articles/bookmarks"> Bookmarked Articles</h3>
+
+
+<% end %>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+
+ var appendCategory = (name, count) => {
+    var newUnorderedList = document.querySelector('.categories');
+    var newLi = document.createElement('li')
+    newLi.textContent = `${name} (${count})`;
+    newUnorderedList.appendChild(newLi)
+  }
+
+  var sortedSectionName = [];
+  var searchResult = {};
+  
+    var sections = {
+      url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=pub_date:(<%=pub_date%>)&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`
+    }
+
+    $.ajax(sections).done( res => {
+      res.response.docs.forEach(doc => {
+        if(searchResult[doc.section_name]) {
+          searchResult[doc.section_name].push(doc);
+        } else {
+          searchResult[doc.section_name] = [doc];
+        }
+      })
+      
+      var topFiveCats = Object.keys(searchResult).map( k => {
+        return {count: searchResult[k].length, name: k };
+      }).sort((a, b) => b.count - a.count).slice(0,5);
+      topFiveCats.forEach( hash => {
+        appendCategory(hash.name, hash.count);   
+        console.log(appendCategory)    
+      });
+    });
+
+</script>
+
