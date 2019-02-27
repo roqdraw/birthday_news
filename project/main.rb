@@ -84,3 +84,7 @@ get '/user/edit' do
   @user = User.find_by(id: current_user.id)
   erb :edit
 end
+
+get '/articles/bookmarks' do 
+  erb :bookmark
+end

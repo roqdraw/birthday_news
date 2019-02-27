@@ -5,8 +5,11 @@
 @import "/stylesheets/components/button.css";
 @import "/stylesheets/pages/edit.css";
 
-body {
+body{
   margin: 0;
+  background-image: url("/images/flipboard-650225-unsplash.jpg");
+  background-size: cover;
+  color: white;
 }
 
 .banner {
@@ -14,12 +17,14 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: rgb(247, 210, 186);
+  background-color: rgb(17, 71, 102);
+  color: white
 }
 
 .banner h1 {
   margin: 0;
 }
+
 
 .content_wrapper {
   padding: 10px;
@@ -27,6 +32,10 @@ body {
   text-align: center;
   display: flex;
   justify-content: space-between;
+  height: 100vh;
+  background-size: 100%;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .content {
