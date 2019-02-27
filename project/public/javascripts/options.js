@@ -1,57 +1,74 @@
-var years = document.querySelector('#years')
-var months = document.querySelector('#months')
-var days = document.querySelector('#days')
+var years = document.querySelector("#years");
+var months = document.querySelector("#months");
+var days = document.querySelector("#days");
 
 var monthChange = {
-  "Jan": 01, "Feb": 02, "Mar": 03, "Apr": 04, "May": 05, "Jun": 06,"Jul": 07, "Aug": 08, "Sep": 09, "Oct": 10, "Nov": 11, "Dec": 12
-}
+  Jan: 1,
+  Feb: 2,
+  Mar: 3,
+  Apr: 4,
+  May: 5,
+  Jun: 6,
+  Jul: 7,
+  Aug: 8,
+  Sep: 9,
+  Oct: 10,
+  Nov: 11,
+  Dec: 12
+};
 
 function daysInMonth(year, month) {
   return new Date(year, month, 0).getDate();
 }
 
-function makeOptions(years, months) {
-    for (let i = new Date().getFullYear(); i >= 1900; i--){
-      var options = document.createElement('option')
-      options.textContent = i
-      years.appendChild(options)
-    }
-
-    var monthValues = Object.keys(monthChange)
-    //populate our months select box
-    for (let j = 0; j < monthValues.length; j++){
-      var options = document.createElement('option')
-      options.textContent = monthValues[j]
-      months.appendChild(options)
-    }
-    
-    for (let e = 1; e <= 31; e++) {
-      var option = document.createElement('option')
-      option.textContent = e
-      days.appendChild(option)
-    }
-};
-
-var makeDayOptions = (e) => {
-  var year = years.value
-  var month = months.value
-  var numberOfDays = daysInMonth(year, monthChange[month])
-  days.innerHTML = ""
-  for(var i = 1; i <= numberOfDays; i++) {
-    var options = document.createElement('option')
-    options.textContent = i
-    days.appendChild(options)
+function addYears(years) {
+  for (let i = new Date().getFullYear(); i >= 1900; i--) {
+    var options = document.createElement("option");
+    options.textContent = i;
+    years.appendChild(options);
   }
 }
 
-console.log('years', years)
-years.addEventListener("change", makeDayOptions)
+function addMonths(months) {
+  var monthKeys = Object.keys(monthChange);
+  var monthValues = Object.values(monthChange);
+  for (let j = 0; j < monthKeys.length; j++) {
+    var option = document.createElement("option");
+    option.textContent = monthKeys[j];
+    option.value = monthValues[j];
+    months.appendChild(option);
+  }
+}
 
-months.addEventListener('change', makeDayOptions)
+function addDays() {
+  for (let e = 1; e <= 31; e++) {
+    var option = document.createElement("option");
+    option.textContent = e;
+    days.appendChild(option);
+  }
+}
 
+function makeOptions(years, months) {
+  addYears(years);
+  addMonths(months);
 
+  addDays()
+}
 
+var makeDayOptions = e => {
+  var year = years.value;
+  var month = months.value;
+  var numberOfDays = daysInMonth(year, month);
+  days.innerHTML = "";
+  for (var i = 1; i <= numberOfDays; i++) {
+    var option = document.createElement("option");
+    option.textContent = i;
+    days.appendChild(option);
+  }
+};
 
+years.addEventListener("change", makeDayOptions);
 
+months.addEventListener("change", makeDayOptions);
 
-makeOptions(years, months)
+makeOptions(years, months);

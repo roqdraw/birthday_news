@@ -1,0 +1,17 @@
+<p>hello</p>
+
+<p class="next">Next Year</p>
+<p class="previous">Previous Year</p>
+
+<script>
+var year = <%=@year%>
+var month = <%=@month%>
+var day = <%=@day%>
+
+var url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${year}-${month}-${day}&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`
+
+
+fetch(url)
+.then(res => res.json())
+.then(data => console.log(data))
+</script>
