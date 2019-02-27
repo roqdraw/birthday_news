@@ -17,10 +17,11 @@
     var birthDay = <%= @user.birth_day %>;
 
     var date = new Date();
-    var currentYear = date.getFullYear(); //(2019)
+    var currentYear = date.getFullYear();
+    var unchangeableYear = date.getFullYear();
 
-    var userAge = currentYear - birthYear; //(27)
-    var yearsOfExistence = currentYear - birthYear; //(27)
+    var userAge = currentYear - birthYear - 1;
+    var yearsOfExistence = currentYear - birthYear;
     var counter = 0;
 
     var getArticles = () => {
@@ -37,11 +38,12 @@
                 console.log("Sorry, but your birthday hasn't hit yet this year!")
                 console.log("Here's the previous birthday's news.")
                 currentYear -= 1;
+                unchangeableYear -= 1;
                 getArticles()
             } else 
 
             var displayArticle = document.createElement('div');
-            displayArticle.className = "display-article";
+            displayArticle.classList.add("display-article");
             articleContainer.appendChild(displayArticle);
 
             var firstArticle = res.response.docs[counter]
@@ -64,10 +66,22 @@
             articleSummary.innerHTML = firstArticle.snippet.slice(0, -3) + ' ';
             articleSummary.appendChild(articleLink)
             displayArticle.appendChild(articleSummary);
+
+            if (currentYear === unchangeableYear) {
+                nextYearBtn.style.display = 'none'
+                previousYearBtn.style.display = 'block'
+            } else if (currentYear === birthYear) {
+                console.log(currentYear, birthYear)
+                previousYearBtn.style.display = 'none'
+                nextYearBtn.style.display = 'block'
+            } else {
+                nextYearBtn.style.display = 'block'
+                previousYearBtn.style.display = 'block'
+            }
         }
 
         var options = {
-            url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`
+            url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`
         };
 
         $.ajax(options).done(getSingleArticle)
@@ -88,7 +102,7 @@
     var getPreviousYear = function(e) {
         currentYear -= 1;
         userAge -= 1;
-        if (userAge === 0) {
+        if (userAge === -1) {
             currentYear += 1;
             userAge += 1;
             console.log("You weren't born yet!")
