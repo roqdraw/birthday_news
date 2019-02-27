@@ -1,4 +1,4 @@
-
+const form = document.querySelector('.signup')
 const signupBtn = document.querySelector('.signup button')
 console.log("linked")
 signupBtn.addEventListener('click', IsEmpty)
@@ -23,4 +23,5 @@ function IsEmpty(e) {
       return
     }
   }
+  form.submit()
 }
