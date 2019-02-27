@@ -29,3 +29,6 @@ ul {
   background-color: rgb(17, 71, 102);
   color: white;
 }
+li {
+  list-style: none;
+}
