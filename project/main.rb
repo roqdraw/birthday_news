@@ -52,6 +52,7 @@ post '/sign_up' do
   user.birth_day = params[:birth_day]
   user.email = params[:email]
   user.password = params[:password]
+  user.color = params[:color]
   user.save
 
   redirect '/'
@@ -70,7 +71,16 @@ get '/articles/guest' do
   @year = params[:year]
   @month = params[:month]
   @day = params[:day]
+  p @year
+  if(@year === nil || @year === "") 
+    redirect '/'
+    return
+  end
   erb :articles_guest_list
+end
+
+get '/articles/bookmarks' do 
+  erb :bookmark
 end
 
 get '/articles/:id' do
@@ -78,9 +88,6 @@ get '/articles/:id' do
   erb :articles_list
 end
 
-get '/articles/bookmarks' do 
-  erb :bookmark
-end
 
 get '/user' do
   if logged_in?
@@ -98,6 +105,7 @@ put '/user' do
   user.birth_day = params[:birth_day]
   user.email = params[:email]
   user.password = params[:password]
+  user.color = params[:color]
   user.save
   redirect '/user'
 end

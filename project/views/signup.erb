@@ -1,34 +1,78 @@
-<form class="signup" action="/sign_up" method="post">
-  <div>
-    <label for="">First name</label>
-    <input class="firstname" name="firstname" type="text"/>
+
+<div class="combine_divs">
+
+  <div class="user_icon">
+    <i id="icon" class="user fas fa-user-circle fa-5x"></i>
+
+    <div class="wrapper">
+      
+      <ul class="color-list">
+        <% ["orange", "green", "white", "pink", "grey", "blue"].each do |color| %>
+            <li class="color"><%= color %></li>
+        <% end %>
+      </ul>
+
+    </div>
+
   </div>
-  <div>
-    <label for="">Last name</label>
-    <input class="lastname" name="lastname" type="text"/>
-  </div>
-  <div>
-    <label for="">Birth year</label>
-    <input class="birth_year" name="birth_year" type="text" placeholder="ex) yyyy"/>
-  </div>
-  <div>
-    <label for="">Birth month</label>
-    <input class="birth_month" name="birth_month" type="text" placeholder="ex) mm"/>
-  </div>
-  <div>
-    <label for="">Birth day</label>
-    <input class="birth_day" name="birth_day" type="text" placeholder="ex) dd"/>
-  </div>
-  <div>
-    <label for="">Email</label>
-    <input class="email" name="email" type="text"/>
-  </div>
-  <div>
-    <label for="">Password</label>
-    <input class="password" name="password" type="password"/>
+ 
+  <div class="signupForm">
+    <form class="signup" action="/sign_up" method="post">
+    <input class="inputColor" type="hidden" name="color"/>
+      <div>
+        <label for="">First name</label>
+        <input class="firstname" name="firstname" type="text"/>
+      </div>
+      <div>
+        <label for="">Last name</label>
+        <input class="lastname" name="lastname" type="text"/>
+      </div>
+      <div>
+        <label for="">Birth year</label>
+        <input class="birth_year" name="birth_year" type="text" placeholder="ex) yyyy"/>
+      </div>
+      <div>
+        <label for="">Birth month</label>
+        <input class="birth_month" name="birth_month" type="text" placeholder="ex) mm"/>
+      </div>
+      <div>
+        <label for="">Birth day</label>
+        <input class="birth_day" name="birth_day" type="text" placeholder="ex) dd"/>
+      </div>
+      <div>
+        <label for="">Email</label>
+        <input class="email" name="email" type="text"/>
+      </div>
+      <div>
+        <label for="">Password</label>
+        <input class="password" name="password" type="password"/>
+      </div>
+
+      <button class="btn">Submit</button>
+    </form>
   </div>
 
-  <button>Submit</button>
-</form>
+</div>
+
+
 
 <script src="/javascripts/signup.js"></script>
+
+<script>
+
+var colorList = document.querySelector('.color-list')
+var selectBtn = document.querySelector('.select')
+
+var handleClick = (e) => {
+  var iconColor = document.querySelector('#icon')
+  iconColor.style.color = e.target.textContent;
+  user.style.color = e.target.textContent;
+  document.querySelector('.inputColor').value = e.target.textContent;
+}
+
+colorList.addEventListener('click', handleClick)
+
+
+
+
+</script>
