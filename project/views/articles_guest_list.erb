@@ -6,15 +6,17 @@
 </div>
 
 <div class="article_content">
-  <h2></h2>
+  <h2></h2> 
+  <i class="hidden fas fa-birthday-cake fa-2x"></i>
   <p class="date"></p>
   <p class="result"></p>
-  <p class="next">Next Year</p>
-  <p class="previous">Previous Year</p>
+  <p class="next hidden">Next Year</p>
+  <p class="previous hidden">Previous Year</p>
 </div>
 
 
 <script>
+const icon = document.querySelector('.article_content i')
 const categories = document.querySelector('.categories')
 const articleContent = document.querySelector('.article_content')
 const result = document.querySelector('.result')
@@ -22,56 +24,70 @@ const title = document.querySelector('h2')
 const publishedDate = document.querySelector('.date')
 const nextBtn = document.querySelector('.next')
 const previousBtn = document.querySelector('.previous')
+
 const birthYear = <%=@year%>;
-let year = <%=@year%>;
-let month = <%=@month%>;
-let day = <%=@day%>;
+const currentYear = new Date().getFullYear()
+const defaultDate = new Date()
+defaultDate.setMonth(<%=@month%> -1)
+defaultDate.setDate(<%=@day%>)
 
-const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${year}-${month}-${day}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`
 
-function getArticle(url) {
-  fetch(url)
+
+function getArticle(category) {
+  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&fq=pub_date:${defaultDate.getFullYear()}-${defaultDate.getMonth() + 1}-${defaultDate.getDate()}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`)
   .then(res => res.json())
   .then(data => {
-    title.textContent = data.response.docs[0].headline.main
-    result.textContent = data.response.docs[0].lead_paragraph
+    icon.classList.remove('hidden')
+    if (defaultDate.getFullYear() === currentYear) {
+    nextBtn.classList.add('hidden')
+    previousBtn.classList.remove('hidden')
+  } else if (defaultDate.getFullYear() === birthYear) {
+    previousBtn.classList.add('hidden')
+    nextBtn.classList.remove('hidden')
+  } else {
+    nextBtn.classList.remove('hidden')
+    previousBtn.classList.remove('hidden')
+  }
+
+    const anchor = document.createElement('a')
+    anchor.setAttribute('href', data.response.docs[0].web_url)
+    anchor.textContent = "[...]"
+    result.appendChild(anchor)
     publishedDate.textContent = data.response.docs[0].pub_date.slice(0,10).replace(/-/g, " ") 
   })
 }
 
-getArticle(url)
+if(defaultDate > new Date()) {
+  defaultDate.setYear(defaultDate.getFullYear()-1)
+  getArticle("election")
+} else {
+  getArticle("election")
+}
+
 
 function differentCategory(e) {
-  const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${e.target.textContent}&fq=pub_date:${birthYear}-${month}-${day}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`
-  getArticle(url)
+  getArticle(e.target.textContent)
 }
 
+
 function previousPage(e) {
-  year -= 1
-  const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${year}-${month}-${day}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`
-   fetch(url)
-  .then(res => res.json())
-  .then(data => {
-    title.textContent = data.response.docs[0].headline.main
-    result.textContent = data.response.docs[0].lead_paragraph
-    publishedDate.textContent = data.response.docs[0].pub_date.slice(0,10).replace(/-/g, " ") 
-  })
+  if(defaultDate.getFullYear() === birthYear) {
+    return
+  }
+  defaultDate.setYear(defaultDate.getFullYear() - 1)
+  getArticle("election")
 }
 
 function nextPage(e) {
-  year += 1
-  const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${year}-${month}-${day}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`
-   fetch(url)
-  .then(res => res.json())
-  .then(data => {
-    title.textContent = data.response.docs[0].headline.main
-    result.textContent = data.response.docs[0].lead_paragraph
-    publishedDate.textContent = data.response.docs[0].pub_date.slice(0,10).replace(/-/g, " ") 
-  })
+  if(defaultDate.getFullYear() === currentYear) {
+    return
+  }
+  defaultDate.setYear(defaultDate.getFullYear() + 1)
+  getArticle("election")
 }
 
 nextBtn.addEventListener('click', nextPage)
 previousBtn.addEventListener('click', previousPage)
 categories.addEventListener('click', differentCategory)
-
+icon.addEventListener('click', saveToBookmark)
 </script>
