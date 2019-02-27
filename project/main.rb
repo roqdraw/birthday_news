@@ -63,14 +63,10 @@ session[:user_id] = nil
 redirect '/'
 end
 
-get '/articles' do
-  erb :articles
-end
-
-get '/articles_list' do
+get '/articles/:id' do
+  @user = User.find_by(id: current_user.id)
   erb :articles_list
 end
-
 
 get '/user/edit' do
   @user = User.find_by(current_user)

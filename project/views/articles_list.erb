@@ -1,47 +1,104 @@
-<%# <h2>Get your news articles!</h2>
-
-<form action="/articles" method="post">
-<input type="hidden" name="_method" value="">
-
-<button>USER BIRTHDATE</button>
-</form>
-
-
-<h2>Choose other date</h2>
-<form action="/articles" post="post">
-    <input type="text" placeholder="YYYY-MM-DD">
-    <button>Search</button>
-</form> %>
 
 <div class="article_container">
 </div>
 
+<p class="next">Next Year</p>
+<p class="previous">Previous Year</p>
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <script>
-    
-    var birthYear = 1992
+    var articleContainer = document.querySelector('.article_container')
+    var nextYearBtn = document.querySelector('.next')
+    var previousYearBtn = document.querySelector('.previous')
+
+    var birthYear = <%= @user.birth_year %>;
+    var birthMonth = <%= @user.birth_month %>;
+    var birthDay = <%= @user.birth_day %>;
+
     var date = new Date();
     var currentYear = date.getFullYear(); //(2019)
-    var yearDifference = currentYear - birthYear //(27)
 
-    var continuousLoop = res => {
-        while (yearDifference > 0) {
-            res.response.docs.forEach(res => console.log(res.headline.main))
-            
-            yearDifference -= 1;
+    var userAge = currentYear - birthYear; //(27)
+    var yearsOfExistence = currentYear - birthYear; //(27)
+    var counter = 0;
+
+    var getArticles = () => {
+
+        var getSingleArticle = res => {
+
+            var damn = document.querySelector('.display-article')
+
+            if ($(".display-article").parents(".article_container").length === 1) {
+                articleContainer.removeChild(damn)
+            }
+
+            if (res.response.docs.length === 0) {
+                console.log("Sorry, but your birthday hasn't hit yet this year!")
+                console.log("Here's the previous birthday's news.")
+                currentYear -= 1;
+                getArticles()
+            } else 
+
+            var displayArticle = document.createElement('div');
+            displayArticle.className = "display-article";
+            articleContainer.appendChild(displayArticle);
+
+            var firstArticle = res.response.docs[counter]
+            var pub_date = firstArticle.pub_date;
+            var dateSplit = pub_date.split('').splice(0,10).join('').split('-').join(' ')
+
+            var articleTitle = document.createElement('h2');
+            articleTitle.textContent = firstArticle.headline.main;
+            displayArticle.appendChild(articleTitle);
+
+            var articleDate = document.createElement('p');
+            articleDate.textContent = dateSplit;
+            displayArticle.appendChild(articleDate);
+
+            var articleLink = document.createElement('a')
+            articleLink.href = firstArticle.web_url
+            articleLink.innerHTML = "..."
+
+            var articleSummary = document.createElement('p');
+            articleSummary.innerHTML = firstArticle.snippet.slice(0, -3) + ' ';
+            articleSummary.appendChild(articleLink)
+            displayArticle.appendChild(articleSummary);
         }
+
+        var options = {
+            url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`
+        };
+
+        $.ajax(options).done(getSingleArticle)
     }
 
-    var consoleLogFirst = res => {
-        console.log(res.response.docs[0]);
+    var getNextYear = function(e) {
+        currentYear += 1;
+        userAge += 1;
+        if (userAge > yearsOfExistence) {
+            currentYear -= 1;
+            userAge -= 1;
+            console.log("Don't time jump! The news hasn't been written yet!")
+            e.preventDefault()
+        } else 
+            getArticles()
     }
 
-    var options = {
-        url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${birthYear}-01-01&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`
-    };
+    var getPreviousYear = function(e) {
+        currentYear -= 1;
+        userAge -= 1;
+        if (userAge === 0) {
+            currentYear += 1;
+            userAge += 1;
+            console.log("You weren't born yet!")
+            e.preventDefault()
+        } else 
+            getArticles()
+    }
 
-    $.ajax(options).done(consoleLogFirst)
-    // $.ajax(options).done(continuousLoop)
+    window.addEventListener('load', getArticles)
+    nextYearBtn.addEventListener('click', getNextYear)
+    previousYearBtn.addEventListener('click', getPreviousYear)
 
 </script>

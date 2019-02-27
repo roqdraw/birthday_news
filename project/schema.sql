@@ -4,7 +4,9 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   firstname VARCHAR(100),
   lastname VARCHAR(100),
-  birthdate INTEGER,
+  birth_year INTEGER,
+  birth_month INTEGER,
+  birth_day INTEGER,
   email VARCHAR(400),
   password_digest VARCHAR(100)
 );
