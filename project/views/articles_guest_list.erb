@@ -9,8 +9,8 @@
   <h2></h2>
   <p class="date"></p>
   <p class="result"></p>
-  <p class="next">Next Year</p>
-  <p class="previous">Previous Year</p>
+  <p class="next hidden">Next Year</p>
+  <p class="previous hidden">Previous Year</p>
 </div>
 
 
@@ -23,7 +23,8 @@ const publishedDate = document.querySelector('.date')
 const nextBtn = document.querySelector('.next')
 const previousBtn = document.querySelector('.previous')
 const birthYear = <%=@year%>;
-let year = <%=@year%>;
+const currentYear = new Date().getFullYear()
+let year = currentYear
 let month = <%=@month%>;
 let day = <%=@day%>;
 
@@ -33,8 +34,22 @@ function getArticle(url) {
   fetch(url)
   .then(res => res.json())
   .then(data => {
+    if (year === currentYear) {
+    nextBtn.classList.add('hidden')
+    previousBtn.classList.remove('hidden')
+  } else if (year === birthYear) {
+    previousBtn.classList.add('hidden')
+    nextBtn.classList.remove('hidden')
+  } else {
+    nextBtn.classList.remove('hidden')
+    previousBtn.classList.remove('hidden')
+  }
     title.textContent = data.response.docs[0].headline.main
     result.textContent = data.response.docs[0].lead_paragraph
+    const anchor = document.createElement('a')
+    anchor.setAttribute('href', data.response.docs[0].web_url)
+    anchor.textContent = "[...]"
+    result.appendChild(anchor)
     publishedDate.textContent = data.response.docs[0].pub_date.slice(0,10).replace(/-/g, " ") 
   })
 }
@@ -46,28 +61,23 @@ function differentCategory(e) {
   getArticle(url)
 }
 
+
 function previousPage(e) {
+  if(year === birthYear) {
+    return
+  }
   year -= 1
   const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${year}-${month}-${day}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`
-   fetch(url)
-  .then(res => res.json())
-  .then(data => {
-    title.textContent = data.response.docs[0].headline.main
-    result.textContent = data.response.docs[0].lead_paragraph
-    publishedDate.textContent = data.response.docs[0].pub_date.slice(0,10).replace(/-/g, " ") 
-  })
+  getArticle(url)
 }
 
 function nextPage(e) {
+  if(year === currentYear) {
+    return
+  }
   year += 1
   const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${year}-${month}-${day}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`
-   fetch(url)
-  .then(res => res.json())
-  .then(data => {
-    title.textContent = data.response.docs[0].headline.main
-    result.textContent = data.response.docs[0].lead_paragraph
-    publishedDate.textContent = data.response.docs[0].pub_date.slice(0,10).replace(/-/g, " ") 
-  })
+  getArticle(url)
 }
 
 nextBtn.addEventListener('click', nextPage)
