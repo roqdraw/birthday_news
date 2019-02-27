@@ -1,10 +1,25 @@
-.edit {
+/* .edit {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 60%;
   align-items: center;
   margin: 0 auto;
+} */
+
+
+.combine_divs {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.user_icon {
+  margin: 5em 0;
+  width: 15%;
+}
+
+select {
+  margin: 20px;
 }
 
 .edit div{
@@ -18,4 +33,14 @@
 .edit input {
   padding: 5px;
   width: 70%;
+}
+
+.edit_form {
+  width: 50%;
+} 
+
+.btn {
+  width: 50px;
+  margin-right: 500px;
+  margin-top: 20px;
 }

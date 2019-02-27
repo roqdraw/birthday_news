@@ -1,11 +1,11 @@
-.signup {
+/* .signup {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 60%;
   align-items: center;
   margin: 0 auto;
-}
+} */
 
 .signup div {
   padding: 10px;
@@ -19,4 +19,15 @@
 .signup input {
   padding: 5px;
   width: 70%;
+}
+
+
+.signupForm {
+  width: 50%;
+} 
+
+.btn {
+  width: 50px;
+  margin-right: 500px;
+  margin-top: 20px;
 }

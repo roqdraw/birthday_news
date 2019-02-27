@@ -13,10 +13,11 @@
     <div>
       <%if logged_in? %>
       <span><%=current_user.firstname%></span>
+      <i style="color: <%= current_user.color %>;"class="user fas fa-user-circle fa-2x"></i>
       <%else%>
       <span>hello, stranger!</span>
-      <%end%>
       <i class="user fas fa-user-circle fa-2x"></i>
+      <%end%>
     </div>
   </div>
   <div class="content_wrapper">
