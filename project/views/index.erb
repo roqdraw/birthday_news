@@ -4,7 +4,7 @@
 </div>
 
 <%if logged_in? %>
-<a href="/articles">Search articles based on my Birthday</a>
+<a href="/articles/<%= current_user.id%>">Search articles based on my Birthday</a>
 <div class="chooseDate">
   <form action="/articles">
     <p>For someone else? Select the date</p>
