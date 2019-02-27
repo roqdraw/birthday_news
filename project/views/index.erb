@@ -1,17 +1,26 @@
 <div class="index">
-<p>Hello! Welcome to Birthday News.</p>
-<p>Have you ever wondered about what happened on your birthday 3 years ago? Or when you were born? This is a website where you can view articles that were published on your birthday dating back to your year of birth.</p>
+  <h2>Hello!</h2> 
+  <h1 class="welcome">Welcome to WHYB!</h1>
+  <h3 class="pronounced">*(pronounced: <span class="noun">Why-Bee</span>)*</h3>
+  <p>Have you ever wondered about what happened on your birthday 3 years ago?</p> 
+  <p>How about 10 years ago?</p>
+  <p>How about the day that you were born?</p>
+  <p>This is a website where you can view articles that were published on your birthday dating back to your year of birth.</p>
+  <p>Jump in to read blasts from the past!</p>
 </div>
 
 <%if logged_in? %>
-<a href="/articles/<%= current_user.id%>">Search articles based on my Birthday</a>
+<h2 class="jump-in">Let's Jump in!</h2>
+<a class="get-my-articles" href="/articles/<%= current_user.id%>">Search articles based on my Birthday</a>
 <div class="chooseDate">
-  <form action="/articles/guest">
-    <p>For someone else? Select the date</p>
-    <select name="year" id="years"></select>
-    <select name="month" id="months"></select>
-    <select name="day" id="days"></select>
-   <button>go</button>
+  <form class="custom-date" action="/articles/guest">
+    <h3>For someone else? Please enter the date.</h3>
+    <div class="select-date">
+      <select name="year" id="years" class="select"></select>
+      <select name="month" id="months" class="select"></select>
+      <select name="day" id="days" class="select"></select>
+      <button class="go-btn">GO</button>
+    </div>
   </form>
 </div>
 <script src="/javascripts/options.js"></script>

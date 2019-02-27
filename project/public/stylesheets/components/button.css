@@ -1,3 +1,7 @@
 button {
   width: 50px;
 }
+
+.next, .previous {
+  background-color: rgb(92, 96, 225);
+}
