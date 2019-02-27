@@ -4,38 +4,45 @@
 @import "/stylesheets/pages/signup.css";
 @import "/stylesheets/components/button.css";
 @import "/stylesheets/pages/edit.css";
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
 body{
   margin: 0;
-  background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("/images/absolutvision-365895-unsplash.jpg");
+  background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url("/images/absolutvision-365895-unsplash.jpg");
   background-size: cover;
+  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
-
 .banner {
-  padding: 10px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
   background-color: rgb(17, 71, 102);
-  color: white
+  color: white;
+  height: 60px;
 }
 
 .banner h1 {
   margin: 0;
 }
 
-
 .content_wrapper {
-  padding: 10px;
+  padding: 20px;
   padding-top: 0;
   text-align: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   height: 100vh;
   background-size: 100%;
   width: 70%;
   margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
 }
 
 .content {
@@ -51,6 +58,207 @@ i:hover {
   cursor: pointer;
 }
 
-.display-article {
-  
+.main-icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+}
+
+/* .main-icons a i, .main-icons a p {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.main-icons a p {
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.main-icons:hover a i {
+  opacity: 0;
+}
+
+.main-icons a p {
+  opacity: 1;
+} */
+
+.menu-icon {
+  padding: 30px;
+  text-decoration: none;
+  color: white;
+  /* transition: 5s; */
+}
+
+.home-icon:hover i, .about-icon:hover i {
+  display: none;
+  transition-delay: 2s;
+  transition: 1s;
+}
+
+.home-icon:hover p, .about-icon:hover p {
+  display: block;
+  transition-delay: 2s;
+  transition: 1s;
+}
+
+.home-menu, .about-menu {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  transition-delay: 2s;
+  transition: 1s;
+}
+
+.user-box {
+  display: flex;
+  align-items: center;
+}
+
+.profile-icon {
+  padding: 0 20px;
+}
+
+.display-article { 
+}
+
+/* Index Page */
+.welcome {
+  color: rgb(92, 96, 225);
+}
+
+.pronounced {
+  font-style: italic;
+  font-weight: lighter;
+}
+
+.noun {
+  font-weight: bold;
+}
+
+.select {
+  background-color: rgb(255, 255, 255);
+  height: 30px;
+  color:  rgb(92, 96, 225);
+  width: 100px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.go-btn {
+  background-color: rgb(92, 96, 225);
+  color: white;
+  height: 30px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: 0.5s;
+}
+
+/* .go-btn:hover {
+  background-color: rgb(92, 96, 225);
+  color: white;
+} */
+
+.jump-in {
+  margin-bottom: 40px;
+}
+
+.get-my-articles {
+  /* color: white;
+  background-color: rgb(92, 96, 225); */
+  background-color: white;
+  color: rgb(92, 96, 225);
+  padding: 1rem;
+  border: rgb(92, 96, 225) solid 5px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 20px;
+  transition: 1s;
+}
+
+.get-my-articles:hover {
+  color: white;
+  background-color: rgb(76, 81, 205);
+  /* background-image: linear-gradient(rgb(45, 56, 182), rgb(10, 19, 126)); */
+  padding: 1.2rem;
+  border-radius: 20px;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 24px;
+  box-shadow: rgb(0, 0, 0, 0.3) 0px 5px 8px;
+}
+
+.custom-date {
+  margin-top: 5%;
+}
+
+.select-date {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.select {
+  margin: 0 0.3em;
+}
+
+.index {
+  margin-bottom: 5%;
+}
+
+.index p {
+  margin: 30px 0;
+}
+
+/* About Page */
+
+.profile-img {
+  width: 100px;
+  border-radius: 50%;
+}
+
+.profile-div {
+  background-color: rgb(92, 96, 225);
+  border-radius: 20px;
+  width: 20%;
+  padding: 1%;
+  margin: 2%;
+  transition: all 1s;
+}
+
+.linkedin, .github {
+  color: white;
+  margin: 0 2%;
+  transition: 0.3s;
+}
+
+.linkedin:hover, .github:hover {
+  color: rgb(10, 19, 126);
+  margin: 0 2%;
+}
+
+.about-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.nyt {
+  margin: 5% 0;
+}
+
+.team-members {
+  display: flex;
+  justify-content: space-around;
+}
+
+.team-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.team-title {
+  color: white;
 }

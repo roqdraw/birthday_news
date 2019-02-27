@@ -17,3 +17,5 @@ CREATE TABLE bookmarks (
   url TEXT,
   FOREIGN KEY (user_id) REFERENCES users (id) on DELETE CASCADE
 );
+
+ALTER TABLE users ADD COLUMN color VARCHAR(100);

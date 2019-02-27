@@ -8,26 +8,23 @@
 </head>
 <body>
   <div class="banner">
-    <i class="menu fas fa-bars fa-2x"></i>
-    <h1>Birthday News</h1>
-    <div>
+    <div class="main-icons">
+      <%# <i class="menu fas fa-bars fa-2x"></i> %>
+      <a href="/" class="home-icon"><i class="fas fa-home fa-2x menu-icon"></i><p class='home-menu hidden'>Home</p></a>
+      <a href="/about" class="about-icon"><i class="far fa-question-circle fa-2x menu-icon"></i><p class='about-menu hidden'>About</p></a>
+    </div>
+    <h1>W.H.Y.B.</h1>
+    <div class="user-box">
       <%if logged_in? %>
       <span><%=current_user.firstname%></span>
+      <i style="color: <%= current_user.color %>;"class="user fas fa-user-circle fa-2x profile-icon"></i>
       <%else%>
-      <span>hello, stranger!</span>
+      <span>Hello, Stranger!</span>
+      <i class="user fas fa-user-circle fa-2x profile-icon"></i>
       <%end%>
-      <i class="user fas fa-user-circle fa-2x"></i>
     </div>
   </div>
   <div class="content_wrapper">
-    <div class="menu_list hidden">
-      <ul>
-        <i class="fas fa-home fa-2x"></i>
-        <a href="/"><li>Home</li></a>
-        <i class="far fa-question-circle fa-2x"></i>
-        <a href="/about"><li>about</li></a>
-      </ul>
-    </div>
     <%if logged_in? %>
     <div class="user_setting hidden">
       <ul>

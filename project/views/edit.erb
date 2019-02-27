@@ -1,34 +1,75 @@
-<form class="edit" action="/user" method="post">
 
-<input type="hidden" name="_method" value="put">
-  <div>
-    <label for="">First name</label>
-    <input name="firstname" type="text" value="<%=@user.firstname%>"/>
-  </div>
-  <div>
-    <label for="">Last name</label>
-    <input name="lastname" type="text" value="<%=@user.lastname%>"/>
-  </div>
-  <div>
-    <label for="">Birth year</label>
-    <input name="birth_year" type="text" value="<%=@user.birth_year%>"/>
-  </div>
-  <div>
-    <label for="">Birth month</label>
-    <input name="birth_month" type="text" value="<%=@user.birth_month%>"/>
-  </div>
-  <div>
-    <label for="">Birth day</label>
-    <input name="birth_day" type="text" value="<%=@user.birth_day%>"/>
-  </div>
-  <div>
-    <label for="">Email</label>
-    <input name="email" type="text" value="<%=@user.email%>"/>
-  </div>
-  <div>
-    <label for="">Password</label>
-    <input name="password" type="password"/>
-  </div>
-  <button>submit</button>
+<div class="combine_divs">
 
-</form>
+  <div class="user_icon">
+
+    <i style="color: <%= current_user.color %>;" id="icon" class="user fas fa-user-circle fa-5x"></i>
+    
+    <div class="wrapper">
+      
+      <ul class="color-list">
+        <% ["orange", "green", "white", "pink", "grey", "blue"].each do |color| %>
+          <li class="color"><%= color %></li>
+        <% end %>
+      </ul>
+
+    </div>
+  </div>
+
+  <div class="edit_form">
+    <form class="edit" action="/user" method="post">
+
+    <input type="hidden" name="_method" value="put"/>
+    <input class="inputColor" type="hidden" name="color"/>
+
+      <div>
+        <label for="">First name</label>
+        <input name="firstname" type="text" value="<%=@user.firstname%>"/>
+      </div>
+      <div>
+        <label for="">Last name</label>
+        <input name="lastname" type="text" value="<%=@user.lastname%>"/>
+      </div>
+      <div>
+        <label for="">Birth year</label>
+        <input name="birth_year" type="text" value="<%=@user.birth_year%>"/>
+      </div>
+      <div>
+        <label for="">Birth month</label>
+        <input name="birth_month" type="text" value="<%=@user.birth_month%>"/>
+      </div>
+      <div>
+        <label for="">Birth day</label>
+        <input name="birth_day" type="text" value="<%=@user.birth_day%>"/>
+      </div>
+      <div>
+        <label for="">Email</label>
+        <input name="email" type="text" value="<%=@user.email%>"/>
+      </div>
+      <div>
+        <label for="">Password</label>
+        <input name="password" type="password"/>
+      </div>
+      <button class="btn">submit</button>
+
+    </form>
+  </div>
+
+</div>
+
+<script>
+
+var colorList = document.querySelector('.color-list')
+var selectBtn = document.querySelector('.select')
+
+var handleClick = (e) => {
+  var iconColor = document.querySelector('#icon')
+  iconColor.style.color = e.target.textContent;
+  user.style.color = e.target.textContent;
+  document.querySelector('.inputColor').value = e.target.textContent;
+}
+
+colorList.addEventListener('click', handleClick)
+
+
+</script>
