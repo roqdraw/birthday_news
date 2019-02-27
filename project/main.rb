@@ -52,6 +52,7 @@ post '/sign_up' do
   user.birth_day = params[:birth_day]
   user.email = params[:email]
   user.password = params[:password]
+  user.color = params[:color]
   user.save
 
   redirect '/'
@@ -104,6 +105,7 @@ put '/user' do
   user.birth_day = params[:birth_day]
   user.email = params[:email]
   user.password = params[:password]
+  user.color = params[:color]
   user.save
   redirect '/user'
 end
