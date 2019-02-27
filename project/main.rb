@@ -79,9 +79,19 @@ get '/articles/guest' do
 end
 
 get '/articles/bookmarks' do 
+  @bookmark = Bookmark.where(user_id: current_user.id)
   erb :bookmark
 end
 
+post '/articles/bookmarks' do
+  bookmark = Bookmark.new
+  bookmark.user_id = current_user.id
+  bookmark.url = params[:article_id]
+  bookmark.save
+
+  redirect '/articles/bookmarks'
+end
+ 
 get '/articles/:id' do
   @user = User.find_by(id: current_user.id)
   erb :articles_list
