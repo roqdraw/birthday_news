@@ -7,9 +7,10 @@
 
 body{
   margin: 0;
-  background-image: url("/images/absolutvision-365895-unsplash.jpg");
+  background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("/images/absolutvision-365895-unsplash.jpg");
   background-size: cover;
 }
+
 
 .banner {
   padding: 10px;
