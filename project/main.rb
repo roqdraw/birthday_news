@@ -46,7 +46,9 @@ post '/sign_up' do
   user = User.new
   user.firstname = params[:firstname]
   user.lastname = params[:lastname]
-  user.birthdate = params[:birthdate]
+  user.birth_year = params[:birth_year]
+  user.birth_month = params[:birth_month]
+  user.birth_day = params[:birth_day]
   user.email = params[:email]
   user.password = params[:password]
   user.save
@@ -68,8 +70,13 @@ get '/articles/:id' do
   erb :articles_list
 end
 
-get '/user/edit' do
-  @user = User.find_by(current_user)
-  erb :edit
+get '/user' do
+  if logged_in?
+    erb :user_show
+  end
+end
 
+get '/user/edit' do
+  @user = User.find_by(id: current_user.id)
+  erb :edit
 end

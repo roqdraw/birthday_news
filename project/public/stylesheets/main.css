@@ -3,7 +3,7 @@
 @import "/stylesheets/pages/index.css";
 @import "/stylesheets/pages/signup.css";
 @import "/stylesheets/components/button.css";
-
+@import "/stylesheets/pages/edit.css";
 
 body {
   margin: 0;
