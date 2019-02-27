@@ -1,10 +1,10 @@
 
 <% if logged_in? %>
+
   <div class="userDetail">
-    <p class="firstName"> <% "First Name: #{current_user.firstname}" %> </p>
-    <p class="lastName"> <% "Last Name: #{current_user.lastname}" %> </p>
-    <% pub_date = "#{current_user.birth_year}-#{current_user.birth_month}-#{current_user.birth_day}"%>
-    <p class="birthDate"><% "Birth Date: #{pub_date}" %></p>
+    <p class="firstName"></p>
+    <p class="lastName"></p>
+    <p class="birthDate"></p>
   </div>
 
   <h3>Frequent Categories</h3>
@@ -30,7 +30,7 @@
   var searchResult = {};
   
     var sections = {
-      url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=pub_date:(<%=pub_date%>)&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`
+      url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=pub_date:(<%=@pub_date%>)&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`
     }
 
     $.ajax(sections).done( res => {
@@ -47,7 +47,7 @@
 
         firstNamePtag.textContent = `First Name: <%= current_user.firstname %> `
         lastNamePtag.textContent = `Last Name: <%= current_user.lastname %>`
-        birthDatePtag.textContent = `Birth Date: <%= pub_date %>`
+        birthDatePtag.textContent = `Birth Date: <%= @pub_date %>`
 
       })
       

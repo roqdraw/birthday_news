@@ -1,4 +1,6 @@
 <form class="edit" action="/user" method="post">
+
+<input type="hidden" name="_method" value="put">
   <div>
     <label for="">First name</label>
     <input name="firstname" type="text" value="<%=@user.firstname%>"/>
@@ -9,15 +11,15 @@
   </div>
   <div>
     <label for="">Birth year</label>
-    <input name="birthdate" type="text" value="<%=@user.birth_year%>"/>
+    <input name="birth_year" type="text" value="<%=@user.birth_year%>"/>
   </div>
   <div>
     <label for="">Birth month</label>
-    <input name="birthdate" type="text" value="<%=@user.birth_month%>"/>
+    <input name="birth_month" type="text" value="<%=@user.birth_month%>"/>
   </div>
   <div>
     <label for="">Birth day</label>
-    <input name="birthdate" type="text" value="<%=@user.birth_day%>"/>
+    <input name="birth_day" type="text" value="<%=@user.birth_day%>"/>
   </div>
   <div>
     <label for="">Email</label>
