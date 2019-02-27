@@ -5,6 +5,7 @@ require 'pg'
 require_relative 'db_config'
 require_relative 'models/bookmark'
 require_relative 'models/user'
+require 'pry'
 enable :sessions
 
 helpers do
@@ -83,8 +84,22 @@ end
 
 get '/user' do
   if logged_in?
+    @pub_date = "#{current_user.birth_year}-#{current_user.birth_month}-#{current_user.birth_day}"
     erb :user_show
   end
+end
+
+put '/user' do
+  user = User.find_by(id: current_user.id)
+  user.firstname = params[:firstname]
+  user.lastname = params[:lastname]
+  user.birth_year = params[:birth_year]
+  user.birth_month = params[:birth_month]
+  user.birth_day = params[:birth_day]
+  user.email = params[:email]
+  user.password = params[:password]
+  user.save
+  redirect '/user'
 end
 
 get '/user/edit' do
