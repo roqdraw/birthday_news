@@ -4,16 +4,18 @@ ul {
 }
 
 .user_setting {
-  border: 1px solid black;
+  
 }
 
 .menu_list {
-  background-color: rgb(247, 210, 186);
+  background-color: rgb(17, 71, 102);
   height: 100vh;
   min-width: 200px;
 }
 
-
+.menu_list a {
+  color: white;
+}
 .user_setting a, .menu_list a{
   text-decoration: none;
 }
@@ -24,5 +26,6 @@ ul {
 }
 
 .user_setting li:hover, .menu_list li:hover{
-  background-color: bisque;
+  background-color: rgb(17, 71, 102);
+  color: white;
 }
