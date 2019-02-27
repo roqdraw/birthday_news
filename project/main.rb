@@ -65,9 +65,20 @@ session[:user_id] = nil
 redirect '/'
 end
 
+get '/articles/guest' do 
+  @year = params[:year]
+  @month = params[:month]
+  @day = params[:day]
+  erb :articles_guest_list
+end
+
 get '/articles/:id' do
   @user = User.find_by(id: current_user.id)
   erb :articles_list
+end
+
+get '/articles/bookmarks' do 
+  erb :bookmark
 end
 
 get '/user' do
@@ -81,6 +92,4 @@ get '/user/edit' do
   erb :edit
 end
 
-get '/articles/bookmarks' do 
-  erb :bookmark
-end
+
