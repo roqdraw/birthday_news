@@ -48,7 +48,7 @@ a {
 }
 
 .content {
-  flex: 1;
+  width: 80%;
   margin-top: 20px;
 }
 
@@ -125,7 +125,7 @@ i:hover {
 
 /* Index Page */
 .welcome {
-  color: rgb(92, 96, 225);
+  color: rgb(17, 71, 102);
 }
 
 .pronounced {
@@ -140,14 +140,14 @@ i:hover {
 .select {
   background-color: rgb(255, 255, 255);
   height: 30px;
-  color:  rgb(92, 96, 225);
+  color:  rgb(17, 71, 102);
   width: 100px;
   text-align: center;
   font-size: 15px;
 }
 
 .go-btn {
-  background-color: rgb(92, 96, 225);
+  background-color: rgb(17, 71, 102);
   color: white;
   height: 30px;
   text-align: center;
@@ -158,7 +158,7 @@ i:hover {
 }
 
 /* .go-btn:hover {
-  background-color: rgb(92, 96, 225);
+  background-color: rgb(17, 71, 102);
   color: white;
 } */
 
@@ -168,11 +168,11 @@ i:hover {
 
 .get-my-articles {
   /* color: white;
-  background-color: rgb(92, 96, 225); */
+  background-color: rgb(17, 71, 102); */
   background-color: white;
-  color: rgb(92, 96, 225);
+  color: rgb(17, 71, 102);
   padding: 1rem;
-  border: rgb(92, 96, 225) solid 5px;
+  border: rgb(17, 71, 102) solid 5px;
   border-radius: 20px;
   font-weight: bold;
   margin-top: 20px;
@@ -182,7 +182,7 @@ i:hover {
 
 .get-my-articles:hover {
   color: white;
-  background-color: rgb(76, 81, 205);
+  background-color: rgb(17, 71, 102);
   /* background-image: linear-gradient(rgb(45, 56, 182), rgb(10, 19, 126)); */
   padding: 1.2rem;
   border-radius: 20px;
@@ -222,7 +222,7 @@ i:hover {
 }
 
 .profile-div {
-  background-color: rgb(92, 96, 225);
+  background-color: rgb(17, 71, 102);
   border-radius: 20px;
   width: 20%;
   padding: 1%;
@@ -237,7 +237,7 @@ i:hover {
 }
 
 .linkedin:hover, .github:hover {
-  color: rgb(10, 19, 126);
+  color: rgb(66, 68, 85);
   margin: 0 2%;
 }
 
@@ -263,4 +263,66 @@ i:hover {
 
 .team-title {
   color: white;
+}
+
+/* Getting Articles */
+
+.display-article {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.article-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.article-top {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(17, 71, 102);
+  color: white;
+  padding: 0 30px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.article-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: rgb(228, 221, 221);
+  padding: 10px 30px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.1)
+}
+
+.article-headings {
+  display: flex;
+  flex-direction: column;
+}
+
+.article-title {
+  margin-bottom: 1px;
+}
+
+.article-result {
+  width: 80%;
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.cake-btn {
+  color: rgb(17, 71, 102);
+  transition: 1s;
+}
+
+.cake-btn:hover {
+  color: rgb(3, 42, 65);
 }
