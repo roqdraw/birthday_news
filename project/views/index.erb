@@ -57,7 +57,7 @@
     .then(res => res.json())
     .then(data => {
       
-      if(data.response.docs === '' || data.response.docs[0].headline.main === '' || data.response.docs[0].snippet === '') {
+      if(data.response.docs[0] === '' || data.response.docs[0].headline.main === '' || data.response.docs[0].snippet === '') {
         getArticle()
       } else{
 
