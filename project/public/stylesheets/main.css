@@ -20,24 +20,33 @@ body{
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  padding: 1em;
+  justify-content: space-around;
+  padding: 1.5em;
   background-color: rgb(17, 71, 102);
   color: white;
-  height: 6em;
+  height: 70px;
+  /* position: relative;
+  overflow: hidden; */
 }
 
-.banner h1 {
+/* .banner h1 {
   margin: 0;
-}
+} */
+
+/* .header-container {
+  display: flex;
+  flex-direction: row;
+} */
 
 #logo {
-  margin: 0 20em;
+  width: 90px;
+  height: 90px;
+  content: url("/images/whyb_white.png");
 }
 
-#logo img {
+/* #logo img {
   width: 90px;
-}
+} */
 
 .content_wrapper {
   padding: 20px;
@@ -101,9 +110,9 @@ i:hover {
   /* transition: 5s;  */
 }
 
-/* .home-icon, .about-icon {
-   margin: 0 20%; 
-} */
+.home-icon, .about-icon {
+  margin: 0 20%;
+}
 
 .home-icon:hover i, .about-icon:hover i {
   display: none; 
@@ -130,7 +139,7 @@ i:hover {
 }
 
 .profile-icon {
-  margin: 0 0 0 20px;
+  margin: 0 0 0 0.3em;
 }
 
 .display-article { 
