@@ -95,26 +95,17 @@ i:hover {
 } 
 */
 
-<<<<<<< HEAD
- .menu-icon {
-  padding: 30px;
-=======
 .menu-icon {
->>>>>>> master
   text-decoration: none;
   color: white;
   /* transition: 5s;  */
 }
 
-<<<<<<< HEAD
- .home-icon:hover i, .about-icon:hover i {
-=======
-.home-icon, .about-icon {
-  /* margin: 0 20%; */
-}
+/* .home-icon, .about-icon {
+   margin: 0 20%; 
+} */
 
 .home-icon:hover i, .about-icon:hover i {
->>>>>>> master
   display: none; 
   transition-delay: 2s; 
   transition: 1s; 
