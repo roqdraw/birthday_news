@@ -62,55 +62,66 @@
   function getArticle() {
     var randomYear = Math.floor(Math.random() * (2019 - 1900 + 1)) + 1900;
     var randomCategory = category[Math.floor(Math.random()*category.length)];
-    fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${randomCategory}&fq=pub_date:${randomYear}-${defaultMonth}-${defaultDay}&api-key=xowFFypBoDXFSCp6TjUuwy5mPmY1H6Ra`)
+    fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${randomCategory}&fq=pub_date:${randomYear}-${defaultMonth}-${defaultDay}&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`)
     .then(res => res.json())
     .then(data => {
       
-      if(data.response.docs[0] !== '' && data.response.docs[0] !== undefined && data.response.docs[0].headline.main !== '' && data.response.docs[0].headline.main !== undefined && data.response.docs[0].snippet !== '') {
-        var displayArticle = document.createElement('div');
-        displayArticle.classList.add("display-article");
-        articleContainer.appendChild(displayArticle);
-
-        var articleTop = document.createElement('div');
-        articleTop.classList.add("article-top");
-        displayArticle.appendChild(articleTop)
-
-        var articleBottom = document.createElement('div');
-        articleBottom.classList.add("article-bottom");
-        displayArticle.appendChild(articleBottom)
-
-        var articleHeader = document.createElement('div');
-        articleHeader.classList.add("article-header");
-        articleBottom.appendChild(articleHeader)
-
-        var firstArticle = data.response.docs[0]
-        var pub_date = firstArticle.pub_date;
-        var dateSplit = pub_date.split('').splice(0,10).join('').split('-').join(' ')
-
-        var articleCategory = document.createElement('p');
-        articleCategory.textContent = firstArticle.section_name;
-        articleCategory.classList.add("article-category")
-        articleTop.appendChild(articleCategory)
-
-        var articleDate = document.createElement('p');
-        articleDate.textContent = dateSplit;
-        articleDate.classList.add("article-date");
-        articleTop.appendChild(articleDate);
-
-        var articleTitle = document.createElement('h4');
-        articleTitle.textContent = firstArticle.headline.main;
-        articleHeader.appendChild(articleTitle);
-
-        var articleSummary = document.createElement('p');
-        articleSummary.innerHTML = firstArticle.snippet.slice(0, -3) + ' ';
-        articleBottom.appendChild(articleSummary);
-        
-        var articleLink = document.createElement('a')
-        articleLink.href = firstArticle.web_url
-        articleLink.innerHTML = "[...]"
-        articleSummary.appendChild(articleLink)
-      } else {
+      if(data.response.docs[0] === '' || data.response.docs[0].headline.main === '' || data.response.docs[0].snippet === '') {
         getArticle()
+      } else {
+      // const anchor = document.createElement('a')
+      // anchor.setAttribute('href', data.response.docs[0].web_url)
+      // anchor.textContent = "[...]"
+      // title.textContent = data.response.docs[0].headline.main
+      // result.textContent = data.response.docs[0].snippet.slice(0, -3) + ' '
+      // result.appendChild(anchor)
+      // publishedDate.textContent = data.response.docs[0].pub_date.slice(0,10).replace(/-/g, " ")
+            var displayArticle = document.createElement('div');
+            displayArticle.classList.add("display-article");
+            articleContainer.appendChild(displayArticle);
+
+            var articleTop = document.createElement('div');
+            articleTop.classList.add("article-top");
+            displayArticle.appendChild(articleTop)
+
+            var articleBottom = document.createElement('div');
+            articleBottom.classList.add("article-bottom");
+            displayArticle.appendChild(articleBottom)
+
+            var articleHeader = document.createElement('div');
+            articleHeader.classList.add("article-header");
+            articleBottom.appendChild(articleHeader)
+
+            var firstArticle = data.response.docs[0]
+            var pub_date = firstArticle.pub_date;
+            var dateSplit = pub_date.split('').splice(0,10).join('').split('-').join(' ')
+
+            var articleCategory = document.createElement('p');
+            articleCategory.textContent = firstArticle.section_name;
+            articleCategory.classList.add("article-category")
+            articleTop.appendChild(articleCategory)
+
+            var articleDate = document.createElement('p');
+            articleDate.textContent = dateSplit;
+            articleDate.classList.add("article-date");
+            articleTop.appendChild(articleDate);
+
+            var articleTitle = document.createElement('h4');
+            articleTitle.textContent = firstArticle.headline.main;
+            articleHeader.appendChild(articleTitle);
+
+            articleHeader.appendChild(icon)
+            icon.classList.remove('hidden')
+            icon.classList.add('cake-btn')
+
+            var articleLink = document.createElement('a')
+            articleLink.href = firstArticle.web_url
+            articleLink.innerHTML = "[...]"
+
+            var articleSummary = document.createElement('p');
+            articleSummary.innerHTML = firstArticle.snippet.slice(0, -3) + ' ';
+            articleSummary.appendChild(articleLink)
+            articleBottom.appendChild(articleSummary);
       }
     })
   }
