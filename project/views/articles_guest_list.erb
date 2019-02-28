@@ -29,7 +29,6 @@
   </div>
 </div>
 
-
 <script>
 const icon = document.querySelector('.article_content .cake-btn')
 const articleId = document.querySelector('.article_id')
@@ -141,9 +140,6 @@ function saveToBookmark(e) {
   .then(res => res.json())
   .then(data => icon.style.color = "white")
 }
-
-
-
 
 nextBtn.addEventListener('click', nextPage)
 previousBtn.addEventListener('click', previousPage)
