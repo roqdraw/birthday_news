@@ -61,8 +61,6 @@ function getArticle(category) {
       result.textContent = "Sorry, We cannot find any articles for this year!"
       return
     }
-
-    // const randomNum = Math.floor(Math.random() * data.response.docs.length)
     
     num = 0
     if(data.response.docs[num].lead_paragraph === undefined) {
