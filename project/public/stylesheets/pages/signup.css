@@ -23,6 +23,10 @@
   margin-top: 20px;
 }
 
+.color {
+  margin-bottom: 5px;
+  padding: 10px;
+}
 
 .color:hover {
   margin-bottom: 5px;
