@@ -22,7 +22,7 @@
     var currentYear = date.getFullYear();
     var unchangeableYear = date.getFullYear();
 
-    var userAge = currentYear - birthYear - 1;
+    var userAge = currentYear - birthYear;
     var yearsOfExistence = currentYear - birthYear;
     var counter = 0;
 
@@ -30,10 +30,10 @@
 
         var getSingleArticle = res => {
 
-            var damn = document.querySelector('.display-article')
+            var displayDiv = document.querySelector('.display-article')
 
             if ($(".display-article").parents(".article_container").length === 1) {
-                articleContainer.removeChild(damn)
+                articleContainer.removeChild(displayDiv)
             }
 
             if (res.response.docs.length === 0) {
@@ -44,23 +44,45 @@
                 getArticles()
             } else 
 
-            icon.classList.remove('hidden')
+            // icon.classList.remove('hidden')
 
             var displayArticle = document.createElement('div');
             displayArticle.classList.add("display-article");
             articleContainer.appendChild(displayArticle);
 
+            var articleTop = document.createElement('div');
+            articleTop.classList.add("article-top");
+            displayArticle.appendChild(articleTop)
+
+            var articleBottom = document.createElement('div');
+            articleBottom.classList.add("article-bottom");
+            displayArticle.appendChild(articleBottom)
+
+            var articleHeader = document.createElement('div');
+            articleHeader.classList.add("article-header");
+            articleBottom.appendChild(articleHeader)
+
             var firstArticle = res.response.docs[counter]
             var pub_date = firstArticle.pub_date;
             var dateSplit = pub_date.split('').splice(0,10).join('').split('-').join(' ')
 
-            var articleTitle = document.createElement('h2');
-            articleTitle.textContent = firstArticle.headline.main;
-            displayArticle.appendChild(articleTitle);
+            var articleCategory = document.createElement('p');
+            articleCategory.textContent = firstArticle.section_name;
+            articleCategory.classList.add("article-category")
+            articleTop.appendChild(articleCategory)
 
             var articleDate = document.createElement('p');
             articleDate.textContent = dateSplit;
-            displayArticle.appendChild(articleDate);
+            articleDate.classList.add("article-date");
+            articleTop.appendChild(articleDate);
+
+            var articleTitle = document.createElement('h4');
+            articleTitle.textContent = firstArticle.headline.main;
+            articleHeader.appendChild(articleTitle);
+
+            articleHeader.appendChild(icon)
+            icon.classList.remove('hidden')
+            icon.classList.add('cake-btn')
 
             var articleLink = document.createElement('a')
             articleLink.href = firstArticle.web_url
@@ -69,7 +91,7 @@
             var articleSummary = document.createElement('p');
             articleSummary.innerHTML = firstArticle.snippet.slice(0, -3) + ' ';
             articleSummary.appendChild(articleLink)
-            displayArticle.appendChild(articleSummary);
+            articleBottom.appendChild(articleSummary);
 
             if (currentYear === unchangeableYear) {
                 nextYearBtn.classList.add('hidden')
@@ -85,7 +107,7 @@
         }
 
         var options = {
-            url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`
+            url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=xowFFypBoDXFSCp6TjUuwy5mPmY1H6Ra`
         };
 
         $.ajax(options).done(getSingleArticle)

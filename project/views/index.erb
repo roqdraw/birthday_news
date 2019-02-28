@@ -1,7 +1,7 @@
 <%if logged_in? %>
   <h2>Hello <span class="username"><%= current_user.firstname %></span></h2>
     
-    <h3>Historic Knowledge of the Day:</h3>
+    <h3>Some time ago, during one of your birthdays:</h3>
     <div class="article_content">
       <h4 class="article-title"></h4> 
       <p class="date"></p>
@@ -57,7 +57,7 @@
     .then(res => res.json())
     .then(data => {
       
-      if(data.response.docs === '' || data.response.docs[0].headline.main === '' || data.response.docs[0].snippet === '') {
+      if(data.response.docs[0] === '' || data.response.docs[0].headline.main === '' || data.response.docs[0].snippet === '') {
         getArticle()
       } else{
 
