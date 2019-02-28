@@ -9,11 +9,12 @@
 <body>
   <div class="banner">
     <div class="main-icons">
-      <%# <i class="menu fas fa-bars fa-2x"></i> %>
       <a href="/" class="home-icon"><i class="fas fa-home fa-2x menu-icon"></i><p class='home-menu hidden'>Home</p></a>
       <a href="/about" class="about-icon"><i class="far fa-question-circle fa-2x menu-icon"></i><p class='about-menu hidden'>About</p></a>
     </div>
-    <h1>W.H.Y.B.</h1>
+    <div id="logo">
+      <img src="/images/whyb_white.png" alt="" />
+    </div>
     <div class="user-box">
       <%if logged_in? %>
       <span><%=current_user.firstname%></span>
