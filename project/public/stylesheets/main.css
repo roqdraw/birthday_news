@@ -92,8 +92,8 @@ i:hover {
 }
 
 .home-icon:hover i, .about-icon:hover i {
-  display: none;
-  transition-delay: 2s;
+  display: none; 
+  transition-delay: 2s; 
   transition: 1s;
 }
 
