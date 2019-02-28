@@ -9,5 +9,6 @@
 
 .user_setting {
   position: absolute;
-  right: 12%;
+  right: 16%;
+  margin: -50px;
 }
