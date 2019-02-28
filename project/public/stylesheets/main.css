@@ -67,7 +67,8 @@ i:hover {
   text-align: center;
 }
 
-/* .main-icons a i, .main-icons a p {
+/*  
+.main-icons a i, .main-icons a p {
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -83,26 +84,27 @@ i:hover {
 
 .main-icons a p {
   opacity: 1;
-} */
+} 
+*/
 
-.menu-icon {
+ .menu-icon {
   padding: 30px;
   text-decoration: none;
   color: white;
-  /* transition: 5s; */
+  /* transition: 5s;  */
 }
 
-.home-icon:hover i, .about-icon:hover i {
+ .home-icon:hover i, .about-icon:hover i {
   display: none; 
   transition-delay: 2s; 
-  transition: 1s;
+  transition: 1s; 
 }
 
-.home-icon:hover p, .about-icon:hover p {
-  display: block;
+.home-icon:hover p, .about-icon:hover p{
+  display: block; 
   transition-delay: 2s;
   transition: 1s;
-}
+} 
 
 .home-menu, .about-menu {
   font-family: Arial, Helvetica, sans-serif;
