@@ -1,14 +1,16 @@
 
 <div class="article_container">
+    <i class="hidden fas fa-birthday-cake fa-2x"></i>
 </div>
 
-<p class="next">Next Year</p>
-<p class="previous">Previous Year</p>
+<p class="next hidden">Next Year</p>
+<p class="previous hidden">Previous Year</p>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <script>
     var articleContainer = document.querySelector('.article_container')
+    var icon = document.querySelector('.article_container i')
     var nextYearBtn = document.querySelector('.next')
     var previousYearBtn = document.querySelector('.previous')
 
@@ -42,6 +44,8 @@
                 getArticles()
             } else 
 
+            icon.classList.remove('hidden')
+
             var displayArticle = document.createElement('div');
             displayArticle.classList.add("display-article");
             articleContainer.appendChild(displayArticle);
@@ -68,15 +72,15 @@
             displayArticle.appendChild(articleSummary);
 
             if (currentYear === unchangeableYear) {
-                nextYearBtn.style.display = 'none'
-                previousYearBtn.style.display = 'block'
+                nextYearBtn.classList.add('hidden')
+                previousYearBtn.classList.remove('hidden')
             } else if (currentYear === birthYear) {
                 console.log(currentYear, birthYear)
-                previousYearBtn.style.display = 'none'
-                nextYearBtn.style.display = 'block'
+                previousYearBtn.classList.add('hidden')
+                nextYearBtn.classList.remove('hidden')
             } else {
-                nextYearBtn.style.display = 'block'
-                previousYearBtn.style.display = 'block'
+                nextYearBtn.classList.remove('hidden')
+                previousYearBtn.classList.remove('hidden')
             }
         }
 
@@ -111,8 +115,13 @@
             getArticles()
     }
 
+    var saveToBookmark = function() {
+
+    }
+
     window.addEventListener('load', getArticles)
     nextYearBtn.addEventListener('click', getNextYear)
     previousYearBtn.addEventListener('click', getPreviousYear)
+    icon.addEventListener('click', saveToBookmark)
 
 </script>
