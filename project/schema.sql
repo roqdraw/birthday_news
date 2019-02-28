@@ -14,7 +14,8 @@ CREATE TABLE users (
 CREATE TABLE bookmarks (
   id SERIAL PRIMARY KEY,
   user_id INTEGER NOT NULL,
-  url TEXT,
+  article_id TEXT,
+  guest_name VARCHAR(100),
   FOREIGN KEY (user_id) REFERENCES users (id) on DELETE CASCADE
 );
 

@@ -9,6 +9,7 @@
   <h2></h2> 
   <form action="/articles/bookmarks" method="post">
     <input class="title_inputs" type="hidden" name="article_id"/>
+    <input class="folder_name" type="hidden" name="folder_name"/>
     <i class="hidden fas fa-birthday-cake fa-2x"></i>
   </form>
   <p class="date"></p>
@@ -20,6 +21,7 @@
 
 <script>
 const icon = document.querySelector('.article_content i')
+
 const categories = document.querySelector('.categories')
 const articleContent = document.querySelector('.article_content')
 const input = document.querySelector('.article_content input')
@@ -60,20 +62,23 @@ function getArticle(category) {
       return
     }
 
-    const randomNum = Math.floor(Math.random() * data.response.docs.length)
-    title.textContent = data.response.docs[randomNum].headline.main
-    input.value = data.response.docs[randomNum]._id
-    if(data.response.docs[randomNum].lead_paragraph === undefined) {
-      result.textContent = data.response.docs[randomNum + 1].lead_paragraph 
+    // const randomNum = Math.floor(Math.random() * data.response.docs.length)
+    
+    num = 0
+    if(data.response.docs[num].lead_paragraph === undefined) {
+      result.textContent = data.response.docs[num+=1].lead_paragraph 
     } else {
-      result.textContent = data.response.docs[randomNum + 1].lead_paragraph
+      console.log(data.response.docs[num].lead_paragraph)
+      result.textContent = data.response.docs[num].lead_paragraph
     }
+    title.textContent = data.response.docs[num].headline.main
+    input.value = data.response.docs[num]._id
 
     const anchor = document.createElement('a')
     anchor.setAttribute('href', data.response.docs[1].web_url)
     anchor.textContent = "[...]"
     result.appendChild(anchor)
-    publishedDate.textContent = data.response.docs[1].pub_date.slice(0,10).replace(/-/g, " ") 
+    publishedDate.textContent = data.response.docs[1].pub_date.slice(0,10).replace(/-/g, " ")
   })
 }
 
@@ -107,7 +112,15 @@ function nextPage(e) {
 }
 
 function saveToBookmark(e) {
-  var bookmarkForm = document.querySelector('.article_content form')
+  e.preventDefault()
+  const promptValue = prompt("Please enter the folder name", "ex)Grandma")
+  let folderName = document.querySelector('.article_content .folder_name')
+  if(promptValue === null) {
+    return
+  }
+  folderName.value = promptValue
+  
+  const bookmarkForm = document.querySelector('.article_content form')
   bookmarkForm.submit()
 }
 
