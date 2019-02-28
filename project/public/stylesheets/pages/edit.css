@@ -35,8 +35,12 @@ select {
   margin-top: 20px;
 }
 
-.color:hover {
+.color {
   margin-bottom: 5px;
+  padding: 10px;
+}
+
+.color:hover {
   background-color: rgb(17, 71, 102);
   color: white;
 }
