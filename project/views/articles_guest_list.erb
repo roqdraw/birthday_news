@@ -8,7 +8,7 @@
 <div class="article_content">
   <h2></h2> 
   <form action="/articles/bookmarks" method="post">
-    <input class="title_inputs" type="hidden" name="article_id"/>
+    <input class="article_id" type="hidden" name="article_id"/>
     <input class="folder_name" type="hidden" name="folder_name"/>
     <i class="hidden fas fa-birthday-cake fa-2x"></i>
   </form>
@@ -21,10 +21,9 @@
 
 <script>
 const icon = document.querySelector('.article_content i')
-
+const articleId = document.querySelector('.article_id')
 const categories = document.querySelector('.categories')
 const articleContent = document.querySelector('.article_content')
-const input = document.querySelector('.article_content input')
 const result = document.querySelector('.result')
 const title = document.querySelector('h2')
 const publishedDate = document.querySelector('.date')
@@ -38,7 +37,7 @@ selectedDate.setMonth(<%=@month%> -1)
 selectedDate.setDate(<%=@day%>)
 
 function getArticle(category) {
-  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&fq=pub_date:${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`)
+  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&fq=pub_date:${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}&api-key=xowFFypBoDXFSCp6TjUuwy5mPmY1H6Ra`)
   .then(res => res.json())
   .then(data => {
     console.log(data)
@@ -61,8 +60,6 @@ function getArticle(category) {
       result.textContent = "Sorry, We cannot find any articles for this year!"
       return
     }
-
-    // const randomNum = Math.floor(Math.random() * data.response.docs.length)
     
     num = 0
     if(data.response.docs[num].lead_paragraph === undefined) {
@@ -72,7 +69,7 @@ function getArticle(category) {
       result.textContent = data.response.docs[num].lead_paragraph
     }
     title.textContent = data.response.docs[num].headline.main
-    input.value = data.response.docs[num]._id
+    articleId.value = data.response.docs[num]._id
 
     const anchor = document.createElement('a')
     anchor.setAttribute('href', data.response.docs[1].web_url)
@@ -112,6 +109,12 @@ function nextPage(e) {
   getArticle("election")
 }
 
+function labelFolder(str) {
+  var lowerCaseStr = str.toLowerCase()
+  var firstLetter = lowerCaseStr[0].toUpperCase()
+  return firstLetter + lowerCaseStr.slice(1)
+}
+
 function saveToBookmark(e) {
   e.preventDefault()
   const promptValue = prompt("Please enter the folder name", "ex)Grandma")
@@ -119,11 +122,18 @@ function saveToBookmark(e) {
   if(promptValue === null) {
     return
   }
-  folderName.value = promptValue
+  var changedFolderName = labelFolder(promptValue)
+  folderName.value = changedFolderName
   
   const bookmarkForm = document.querySelector('.article_content form')
-  bookmarkForm.submit()
+  // bookmarkForm.submit()
+  fetch(`/api/articles/bookmarks?article_id=${articleId.value}&folder_name=${folderName.value}`, {method: "post"})
+  .then(res => res.json())
+  .then(data => console.log(data))
 }
+
+
+
 
 nextBtn.addEventListener('click', nextPage)
 previousBtn.addEventListener('click', previousPage)
