@@ -8,22 +8,24 @@
 </head>
 <body>
   <div class="banner">
-    <div class="main-icons">
-      <a href="/" class="home-icon"><i class="fas fa-home fa-2x menu-icon"></i><p class='home-menu hidden'>Home</p></a>
-      <a href="/about" class="about-icon"><i class="far fa-question-circle fa-2x menu-icon"></i><p class='about-menu hidden'>About</p></a>
-    </div>
-    <div id="logo">
-      <img src="/images/whyb_white.png" alt="" />
-    </div>
-    <div class="user-box">
-      <%if logged_in? %>
-      <span><%=current_user.firstname%></span>
-      <i style="color: <%= current_user.color %>;"class="user fas fa-user-circle fa-2x profile-icon"></i>
-      <%else%>
-      <span>Hello, Stranger!</span>
-      <i class="user fas fa-user-circle fa-2x profile-icon"></i>
-      <%end%>
-    </div>
+    <%# <div class="header-container"> %>
+      <div class="main-icons">
+        <a href="/" class="home-icon"><i class="fas fa-home fa-2x menu-icon"></i><p class='home-menu hidden'>Home</p></a>
+        <a href="/about" class="about-icon"><i class="far fa-question-circle fa-2x menu-icon"></i><p class='about-menu hidden'>About</p></a>
+      </div>
+      <div id="logo">
+        <%# <img src="/images/whyb_white.png" alt="" /> %>
+      </div>
+      <div class="user-box">
+        <%if logged_in? %>
+        <span><%=current_user.firstname%></span>
+        <i style="color: <%= current_user.color %>;"class="user fas fa-user-circle fa-2x profile-icon"></i>
+        <%else%>
+        <span>Hello, Stranger!</span>
+        <i class="user fas fa-user-circle fa-2x profile-icon"></i>
+        <%end%>
+      </div>
+    <%# </div> %>
   </div>
   <div class="content_wrapper">
     <%if logged_in? %>
