@@ -9,5 +9,10 @@ button {
 }
 
 .next, .previous {
-  background-color: rgb(92, 96, 225);
+  color: white;
+  background-color: rgb(17, 71, 102);
+  width: 20%;
+  padding: 2%;
+  border-radius: 20px;
+  cursor: pointer;
 }
