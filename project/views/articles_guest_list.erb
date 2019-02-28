@@ -121,6 +121,7 @@ function labelFolder(str) {
 
 function saveToBookmark(e) {
   e.preventDefault()
+  icon.style.color = "white"
   const promptValue = prompt("Please enter the folder name", "ex)Grandma")
   let folderName = document.querySelector('.article_content .folder_name')
   if(promptValue === null) {
@@ -128,9 +129,8 @@ function saveToBookmark(e) {
   }
   var changedFolderName = labelFolder(promptValue)
   folderName.value = changedFolderName
+
   
-  const bookmarkForm = document.querySelector('.article_content form')
-  // bookmarkForm.submit()
   fetch(`/api/articles/bookmarks?article_id=${articleId.value}&folder_name=${folderName.value}`, {method: "post"})
   .then(res => res.json())
   .then(data => console.log(data))
