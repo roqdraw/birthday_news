@@ -47,7 +47,7 @@ selectedDate.setMonth(<%=@month%> -1)
 selectedDate.setDate(<%=@day%>)
 
 function getArticle(category) {
-  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&fq=pub_date:${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`)
+  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&fq=pub_date:${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`)
   .then(res => res.json())
   .then(data => {
     articleContent.classList.remove('hidden')
@@ -127,7 +127,6 @@ function labelFolder(str) {
 
 function saveToBookmark(e) {
   e.preventDefault()
-  icon.style.color = "white"
   const promptValue = prompt("Please enter the folder name", "ex)Grandma")
   let folderName = document.querySelector('.article_content .folder_name')
   if(promptValue === null) {
@@ -139,7 +138,7 @@ function saveToBookmark(e) {
   
   fetch(`/api/articles/bookmarks?article_id=${articleId.value}&folder_name=${folderName.value}`, {method: "post"})
   .then(res => res.json())
-  .then(data => console.log(data))
+  .then(data => icon.style.color = "white")
 }
 
 nextBtn.addEventListener('click', nextPage)
