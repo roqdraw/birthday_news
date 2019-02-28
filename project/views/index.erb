@@ -87,10 +87,10 @@
         var pub_date = firstArticle.pub_date;
         var dateSplit = pub_date.split('').splice(0,10).join('').split('-').join(' ')
 
-        var articleCategory = document.createElement('p');
-        articleCategory.textContent = firstArticle.section_name;
-        articleCategory.classList.add("article-category")
-        articleTop.appendChild(articleCategory)
+        // var articleCategory = document.createElement('p');
+        // articleCategory.textContent = firstArticle.section_name;
+        // articleCategory.classList.add("article-category")
+        // articleTop.appendChild(articleCategory)
 
         var articleDate = document.createElement('p');
         articleDate.textContent = dateSplit;
