@@ -2,11 +2,19 @@
   <h2>Hello, <span class="username"><%= current_user.firstname %>.</span></h2>
     
     <h3>Some time ago, during one of your birthdays:</h3>
-    <div class="article_content">
+    <%# <div class="article_content">
       <h4 class="article-title"></h4> 
       <p class="date"></p>
       <p class="result"></p>
-    </div>
+    </div> %>
+
+  <div class="article_container">
+    <form action="/articles/bookmarks" method="post">
+      <input class="article_id" type="hidden" name="article_id"/>
+      <input class="folder_name" type="hidden" name="folder_name"/>
+      <%# <i class="hidden fas fa-birthday-cake fa-2x"></i> %>
+    </form>
+  </div>
 
   <h2 class="jump-in">Let's Jump in!</h2>
   <a class="get-my-articles" href="/articles/<%= current_user.id%>">Search articles based on my Birthday</a>
@@ -39,10 +47,11 @@
 <script src="/javascripts/options.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-  const articleContent = document.querySelector('.article_content')
-  const title = document.querySelector('.article-title')
-  const publishedDate = document.querySelector('.date')
-  const result = document.querySelector('.result')
+  const articleContainer = document.querySelector('.article_container')
+  var icon = document.querySelector('.article_container i')
+  // const title = document.querySelector('.article-title')
+  // const publishedDate = document.querySelector('.date')
+  // const result = document.querySelector('.result')
 
   const currentYear = new Date().getFullYear()
   const defaultDate = new Date()
@@ -51,7 +60,7 @@
   var category = ["science", "arts", "technology", "real-estate", "health", "food", "business", "sports", "style", "world"]
 
   function getArticle() {
-    var randomYear = Math.floor(Math.random() * (2019 - 1850 + 1)) + 1850;
+    var randomYear = Math.floor(Math.random() * (2019 - 1900 + 1)) + 1900;
     var randomCategory = category[Math.floor(Math.random()*category.length)];
     fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${randomCategory}&fq=pub_date:${randomYear}-${defaultMonth}-${defaultDay}&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`)
     .then(res => res.json())
@@ -59,15 +68,61 @@
       
       if(data.response.docs[0] === '' || data.response.docs[0].headline.main === '' || data.response.docs[0].snippet === '') {
         getArticle()
-      } else{
+      } else {
+      // const anchor = document.createElement('a')
+      // anchor.setAttribute('href', data.response.docs[0].web_url)
+      // anchor.textContent = "[...]"
+      // title.textContent = data.response.docs[0].headline.main
+      // result.textContent = data.response.docs[0].snippet.slice(0, -3) + ' '
+      // result.appendChild(anchor)
+      // publishedDate.textContent = data.response.docs[0].pub_date.slice(0,10).replace(/-/g, " ")
+            var displayArticle = document.createElement('div');
+            displayArticle.classList.add("display-article");
+            articleContainer.appendChild(displayArticle);
 
-      const anchor = document.createElement('a')
-      anchor.setAttribute('href', data.response.docs[0].web_url)
-      anchor.textContent = "[...]"
-      title.textContent = data.response.docs[0].headline.main
-      result.textContent = data.response.docs[0].snippet.slice(0, -3) + ' '
-      result.appendChild(anchor)
-      publishedDate.textContent = data.response.docs[0].pub_date.slice(0,10).replace(/-/g, " ")}
+            var articleTop = document.createElement('div');
+            articleTop.classList.add("article-top");
+            displayArticle.appendChild(articleTop)
+
+            var articleBottom = document.createElement('div');
+            articleBottom.classList.add("article-bottom");
+            displayArticle.appendChild(articleBottom)
+
+            var articleHeader = document.createElement('div');
+            articleHeader.classList.add("article-header");
+            articleBottom.appendChild(articleHeader)
+
+            var firstArticle = data.response.docs[0]
+            var pub_date = firstArticle.pub_date;
+            var dateSplit = pub_date.split('').splice(0,10).join('').split('-').join(' ')
+
+            var articleCategory = document.createElement('p');
+            articleCategory.textContent = firstArticle.section_name;
+            articleCategory.classList.add("article-category")
+            articleTop.appendChild(articleCategory)
+
+            var articleDate = document.createElement('p');
+            articleDate.textContent = dateSplit;
+            articleDate.classList.add("article-date");
+            articleTop.appendChild(articleDate);
+
+            var articleTitle = document.createElement('h4');
+            articleTitle.textContent = firstArticle.headline.main;
+            articleHeader.appendChild(articleTitle);
+
+            articleHeader.appendChild(icon)
+            icon.classList.remove('hidden')
+            icon.classList.add('cake-btn')
+
+            var articleLink = document.createElement('a')
+            articleLink.href = firstArticle.web_url
+            articleLink.innerHTML = "[...]"
+
+            var articleSummary = document.createElement('p');
+            articleSummary.innerHTML = firstArticle.snippet.slice(0, -3) + ' ';
+            articleSummary.appendChild(articleLink)
+            articleBottom.appendChild(articleSummary);
+      }
     })
   }
 
