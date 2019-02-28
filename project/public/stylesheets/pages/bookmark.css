@@ -1,0 +1,8 @@
+.bookmark_wrapper {
+  border: 1px solid black;
+}
+
+.main_article {
+  display: flex;
+  justify-content: space-between;
+}

@@ -87,7 +87,6 @@ end
 
 get '/api/articles/bookmarks/categories' do
   bookmarks = Bookmark.where(guest_name: params[:guest_name])
-  binding.pry
   content_type "application/json"
   bookmarks.to_json
 end
@@ -98,14 +97,14 @@ get '/api/articles/bookmarks' do
   guests.to_json
 end
 
-post '/articles/bookmarks' do
+post '/api/articles/bookmarks' do
   bookmark = Bookmark.new
   bookmark.user_id = current_user.id
   bookmark.article_id = params[:article_id]
   bookmark.guest_name = params[:folder_name]
   bookmark.save
-
-  redirect '/articles/bookmarks'
+  content_type "application/json"
+  bookmark.to_json
 end
  
 get '/articles/:id' do

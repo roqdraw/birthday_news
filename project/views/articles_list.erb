@@ -1,14 +1,15 @@
-
 <div class="article_container">
+  <form action="/articles/bookmarks" method="post">
+    <input class="article_id" type="hidden" name="article_id"/>
+    <input class="folder_name" type="hidden" name="folder_name"/>
     <i class="hidden fas fa-birthday-cake fa-2x"></i>
+  </form>
 </div>
-
 <p class="next hidden">Next Year</p>
 <p class="previous hidden">Previous Year</p>
-
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
 <script>
+    const articleId = document.querySelector('.article_id')
     var articleContainer = document.querySelector('.article_container')
     var icon = document.querySelector('.article_container i')
     var nextYearBtn = document.querySelector('.next')
@@ -42,9 +43,7 @@
                 currentYear -= 1;
                 unchangeableYear -= 1;
                 getArticles()
-            } else 
-
-            // icon.classList.remove('hidden')
+            } else {
 
             var displayArticle = document.createElement('div');
             displayArticle.classList.add("display-article");
@@ -66,6 +65,8 @@
             var pub_date = firstArticle.pub_date;
             var dateSplit = pub_date.split('').splice(0,10).join('').split('-').join(' ')
 
+            articleId.value = firstArticle._id
+            
             var articleCategory = document.createElement('p');
             articleCategory.textContent = firstArticle.section_name;
             articleCategory.classList.add("article-category")
@@ -104,6 +105,7 @@
                 nextYearBtn.classList.remove('hidden')
                 previousYearBtn.classList.remove('hidden')
             }
+            }
         }
 
         var options = {
@@ -137,8 +139,17 @@
             getArticles()
     }
 
-    var saveToBookmark = function() {
+    var saveToBookmark = function(e) {
+      e.preventDefault()
+      console.log("clicked")
+      let folderName = document.querySelector('.article_container .folder_name')
 
+      folderName.value = "My Articles"
+
+      const bookmarkForm = document.querySelector('.article_container form')
+      fetch(`/api/articles/bookmarks?article_id=${articleId.value}&folder_name=${folderName.value}`, {method: "post"})
+      .then(res => res.json())
+      .then(data => console.log(data))
     }
 
     window.addEventListener('load', getArticles)
