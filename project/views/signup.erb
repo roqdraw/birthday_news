@@ -6,7 +6,7 @@
 
     <div class="wrapper">
       
-      <ul class="color-list">
+      <ul class="color-list hidden">
         <% ["orange", "green", "white", "pink", "grey", "blue"].each do |color| %>
             <li class="color"><%= color %></li>
         <% end %>
@@ -62,9 +62,9 @@
 
 var colorList = document.querySelector('.color-list')
 var selectBtn = document.querySelector('.select')
+var iconColor = document.querySelector('#icon')
 
 var handleClick = (e) => {
-  var iconColor = document.querySelector('#icon')
   iconColor.style.color = e.target.textContent;
   user.style.color = e.target.textContent;
   document.querySelector('.inputColor').value = e.target.textContent;
@@ -72,7 +72,10 @@ var handleClick = (e) => {
 
 colorList.addEventListener('click', handleClick)
 
+var showDropdown =(e) => {
+ colorList.classList.toggle('hidden')
+}
 
-
+iconColor.addEventListener('click', showDropdown)
 
 </script>
