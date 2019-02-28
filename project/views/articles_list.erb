@@ -1,13 +1,20 @@
-<div class="main">
-<p class="previous hidden hidden-arrows"><i class="fas fa-angle-left fa-2x"></i></p>
-<div class="article_container">
-  <form action="/articles/bookmarks" method="post">
-    <input class="article_id" type="hidden" name="article_id"/>
-    <input class="folder_name" type="hidden" name="folder_name"/>
-    <i class="hidden fas fa-birthday-cake fa-2x"></i>
-  </form>
+<div class="categories">
+  <button>business</button>
+  <button>education</button>
+  <button>opinion</button>
+  <button>foreign</button>
 </div>
-<p class="next hidden hidden-arrows"><i class="fas fa-angle-right fa-2x"></i></p>
+
+<div class="main">
+  <p class="previous hidden hidden-arrows"><i class="fas fa-angle-left fa-2x"></i></p>
+  <div class="article_container">
+    <form action="/articles/bookmarks" method="post">
+      <input class="article_id" type="hidden" name="article_id"/>
+      <input class="folder_name" type="hidden" name="folder_name"/>
+      <i class="hidden fas fa-birthday-cake fa-2x"></i>
+    </form>
+  </div>
+  <p class="next hidden hidden-arrows"><i class="fas fa-angle-right fa-2x"></i></p>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -118,7 +125,7 @@
         }
 
         var options = {
-            url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`
+            url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`
         };
 
         $.ajax(options).done(getSingleArticle)
