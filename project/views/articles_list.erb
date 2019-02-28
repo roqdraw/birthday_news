@@ -20,6 +20,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
     const articleId = document.querySelector('.article_id')
+    const categories = document.querySelector('.categories')
     var articleContainer = document.querySelector('.article_container')
     var icon = document.querySelector('.article_container i')
     var nextYearBtn = document.querySelector('.next')
@@ -37,7 +38,7 @@
     var yearsOfExistence = currentYear - birthYear;
     var counter = 0;
 
-    var getArticles = () => {
+    var getArticles = (category) => {
 
         var getSingleArticle = res => {
 
@@ -125,11 +126,16 @@
         }
 
         var options = {
-            url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`
+            url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`
         };
 
         $.ajax(options).done(getSingleArticle)
     }
+
+function differentCategory(e) {
+  getArticles(e.target.textContent)
+  
+}
 
     var getNextYear = function(e) {
         currentYear += 1;
@@ -140,7 +146,7 @@
             console.log("Don't time jump! The news hasn't been written yet!")
             e.preventDefault()
         } else 
-            getArticles()
+            getArticles("election")
     }
 
     var getPreviousYear = function(e) {
@@ -152,7 +158,7 @@
             console.log("You weren't born yet!")
             e.preventDefault()
         } else 
-            getArticles()
+            getArticles("election")
     }
 
     var saveToBookmark = function(e) {
@@ -172,5 +178,5 @@
     nextYearBtn.addEventListener('click', getNextYear)
     previousYearBtn.addEventListener('click', getPreviousYear)
     icon.addEventListener('click', saveToBookmark)
-
+    categories.addEventListener('click', differentCategory)
 </script>

@@ -26,7 +26,8 @@
 11. When person's task has been completed, person piggybacks onto team member's current task or sets out to do a new task.
 --------------------------------------
 
-### Link to your user stories – who are your users, what do they want, and why?
+### User stories – who are your users, what do they want, and why?
+People who are seeking for a unique birthday presents for others or curious about what happened on their birthday since they were born till now. They are able to see the articles and filter the articles according to the categories given. We provided a feature of bookmark as well if they want to store specific articles in a folder. If they bookmarked based on their birthday, bookmark articles will be stored in a folder name "My Articles", if they search manually to check with somebody else's birthday, they can save the articles in a folder and they can give a name for the folder.
 
 --------------------------------------
 
