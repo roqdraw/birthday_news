@@ -5,6 +5,7 @@
 @import "/stylesheets/pages/bookmark.css";
 @import "/stylesheets/components/button.css";
 @import "/stylesheets/pages/edit.css";
+@import "/stylesheets/pages/articles.css";
 @import "/stylesheets/components/bookmark_folders.css";
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
@@ -84,25 +85,6 @@ i:hover {
   text-align: center;
 }
 
-/*  
-.main-icons a i, .main-icons a p {
-  transition: opacity 0.5s ease-in-out;
-}
-
-.main-icons a p {
-  top: 0;
-  left: 0;
-  opacity: 0;
-}
-
-.main-icons:hover a i {
-  opacity: 0;
-}
-
-.main-icons a p {
-  opacity: 1;
-} 
-*/
 
 .menu-icon {
   text-decoration: none;
@@ -142,8 +124,6 @@ i:hover {
   margin: 0 0 0 0.3em;
 }
 
-.display-article { 
-}
 
 /* Index Page */
 .welcome {
@@ -178,11 +158,6 @@ i:hover {
   border-radius: 8px;
   transition: 0.5s;
 }
-
-/* .go-btn:hover {
-  background-color: rgb(17, 71, 102);
-  color: white;
-} */
 
 .jump-in {
   margin-bottom: 40px;

@@ -56,8 +56,8 @@
     fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${randomCategory}&fq=pub_date:${randomYear}-${defaultMonth}-${defaultDay}&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`)
     .then(res => res.json())
     .then(data => {
-      
-      if(data.response.docs[0] === '' || data.response.docs[0].headline.main === '' || data.response.docs[0].snippet === '') {
+      console.log(data.response)
+      if(data.response.docs.length === 0) {
         getArticle()
       } else{
 

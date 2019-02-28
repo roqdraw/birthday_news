@@ -1,3 +1,10 @@
+<div class="categories">
+  <button>business</button>
+  <button>education</button>
+  <button>opinion</button>
+  <button>foreign</button>
+</div>
+
 <div class="article_container">
   <form action="/articles/bookmarks" method="post">
     <input class="article_id" type="hidden" name="article_id"/>
@@ -5,8 +12,8 @@
     <i class="hidden fas fa-birthday-cake fa-2x"></i>
   </form>
 </div>
-<p class="next hidden"><i class="fas fa-angle-left fa-2x"></i></p>
-<p class="previous hidden"><i class="fas fa-angle-right fa-2x"></i></p>
+<p class="next hidden"><i class="fas fa-angle-right fa-2x"></i></p>
+<p class="previous hidden"><i class="fas fa-angle-left fa-2x"></i></p>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
     const articleId = document.querySelector('.article_id')
