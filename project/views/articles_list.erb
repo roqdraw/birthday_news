@@ -1,127 +1,141 @@
-
 <div class="article_container">
+  <form action="/articles/bookmarks" method="post">
+    <input class="article_id" type="hidden" name="article_id"/>
+    <input class="folder_name" type="hidden" name="folder_name"/>
     <i class="hidden fas fa-birthday-cake fa-2x"></i>
+  </form>
 </div>
-
 <p class="next hidden">Next Year</p>
 <p class="previous hidden">Previous Year</p>
-
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
 <script>
-    var articleContainer = document.querySelector('.article_container')
-    var icon = document.querySelector('.article_container i')
-    var nextYearBtn = document.querySelector('.next')
-    var previousYearBtn = document.querySelector('.previous')
+  const articleId = document.querySelector('.article_id')
+  var articleContainer = document.querySelector('.article_container')
+  var icon = document.querySelector('.article_container i')
+  var nextYearBtn = document.querySelector('.next')
+  var previousYearBtn = document.querySelector('.previous')
+  
+  var birthYear = <%= @user.birth_year %>;
+  var birthMonth = <%= @user.birth_month %>;
+  var birthDay = <%= @user.birth_day %>;
+  
+  var date = new Date();
+  var currentYear = date.getFullYear();
+  var unchangeableYear = date.getFullYear();
+  
+  var userAge = currentYear - birthYear - 1;
+  var yearsOfExistence = currentYear - birthYear;
+  var counter = 0;
+  
+  var getArticles = () => {
+  
+      var getSingleArticle = res => {
+  
+          var damn = document.querySelector('.display-article')
+  
+          if ($(".display-article").parents(".article_container").length === 1) {
+              articleContainer.removeChild(damn)
+          }
+  
+          if (res.response.docs.length === 0) {
+              console.log("Sorry, but your birthday hasn't hit yet this year!")
+              console.log("Here's the previous birthday's news.")
+              currentYear -= 1;
+              unchangeableYear -= 1;
+              getArticles()
+          } else {
+  
+          icon.classList.remove('hidden')
+          
 
-    var birthYear = <%= @user.birth_year %>;
-    var birthMonth = <%= @user.birth_month %>;
-    var birthDay = <%= @user.birth_day %>;
+          var displayArticle = document.createElement('div');
+          displayArticle.classList.add("display-article");
+          articleContainer.appendChild(displayArticle);
+  
+          var firstArticle = res.response.docs[counter]
+          var pub_date = firstArticle.pub_date;
+          var dateSplit = pub_date.split('').splice(0,10).join('').split('-').join(' ')
+  
+         
+          articleId.value = firstArticle._id
 
-    var date = new Date();
-    var currentYear = date.getFullYear();
-    var unchangeableYear = date.getFullYear();
-
-    var userAge = currentYear - birthYear - 1;
-    var yearsOfExistence = currentYear - birthYear;
-    var counter = 0;
-
-    var getArticles = () => {
-
-        var getSingleArticle = res => {
-
-            var damn = document.querySelector('.display-article')
-
-            if ($(".display-article").parents(".article_container").length === 1) {
-                articleContainer.removeChild(damn)
-            }
-
-            if (res.response.docs.length === 0) {
-                console.log("Sorry, but your birthday hasn't hit yet this year!")
-                console.log("Here's the previous birthday's news.")
-                currentYear -= 1;
-                unchangeableYear -= 1;
-                getArticles()
-            } else 
-
-            icon.classList.remove('hidden')
-
-            var displayArticle = document.createElement('div');
-            displayArticle.classList.add("display-article");
-            articleContainer.appendChild(displayArticle);
-
-            var firstArticle = res.response.docs[counter]
-            var pub_date = firstArticle.pub_date;
-            var dateSplit = pub_date.split('').splice(0,10).join('').split('-').join(' ')
-
-            var articleTitle = document.createElement('h2');
-            articleTitle.textContent = firstArticle.headline.main;
-            displayArticle.appendChild(articleTitle);
-
-            var articleDate = document.createElement('p');
-            articleDate.textContent = dateSplit;
-            displayArticle.appendChild(articleDate);
-
-            var articleLink = document.createElement('a')
-            articleLink.href = firstArticle.web_url
-            articleLink.innerHTML = "[...]"
-
-            var articleSummary = document.createElement('p');
-            articleSummary.innerHTML = firstArticle.snippet.slice(0, -3) + ' ';
-            articleSummary.appendChild(articleLink)
-            displayArticle.appendChild(articleSummary);
-
-            if (currentYear === unchangeableYear) {
-                nextYearBtn.classList.add('hidden')
-                previousYearBtn.classList.remove('hidden')
-            } else if (currentYear === birthYear) {
-                console.log(currentYear, birthYear)
-                previousYearBtn.classList.add('hidden')
-                nextYearBtn.classList.remove('hidden')
-            } else {
-                nextYearBtn.classList.remove('hidden')
-                previousYearBtn.classList.remove('hidden')
-            }
-        }
-
-        var options = {
-            url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`
-        };
-
-        $.ajax(options).done(getSingleArticle)
-    }
-
-    var getNextYear = function(e) {
-        currentYear += 1;
-        userAge += 1;
-        if (userAge > yearsOfExistence) {
-            currentYear -= 1;
-            userAge -= 1;
-            console.log("Don't time jump! The news hasn't been written yet!")
-            e.preventDefault()
-        } else 
-            getArticles()
-    }
-
-    var getPreviousYear = function(e) {
-        currentYear -= 1;
-        userAge -= 1;
-        if (userAge === -1) {
-            currentYear += 1;
-            userAge += 1;
-            console.log("You weren't born yet!")
-            e.preventDefault()
-        } else 
-            getArticles()
-    }
-
-    var saveToBookmark = function() {
-
-    }
-
-    window.addEventListener('load', getArticles)
-    nextYearBtn.addEventListener('click', getNextYear)
-    previousYearBtn.addEventListener('click', getPreviousYear)
-    icon.addEventListener('click', saveToBookmark)
-
+          var articleTitle = document.createElement('h2');
+          articleTitle.textContent = firstArticle.headline.main;
+          displayArticle.appendChild(articleTitle);
+  
+          var articleDate = document.createElement('p');
+          articleDate.textContent = dateSplit;
+          displayArticle.appendChild(articleDate);
+  
+          var articleLink = document.createElement('a')
+          articleLink.href = firstArticle.web_url
+          articleLink.innerHTML = "[...]"
+  
+          var articleSummary = document.createElement('p');
+          articleSummary.innerHTML = firstArticle.snippet.slice(0, -3) + ' ';
+          articleSummary.appendChild(articleLink)
+          displayArticle.appendChild(articleSummary);
+  
+          if (currentYear === unchangeableYear) {
+              nextYearBtn.classList.add('hidden')
+              previousYearBtn.classList.remove('hidden')
+          } else if (currentYear === birthYear) {
+              console.log(currentYear, birthYear)
+              previousYearBtn.classList.add('hidden')
+              nextYearBtn.classList.remove('hidden')
+          } else {
+              nextYearBtn.classList.remove('hidden')
+              previousYearBtn.classList.remove('hidden')
+          }
+          }
+      }
+  
+      var options = {
+          url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`
+      };
+  
+      $.ajax(options).done(getSingleArticle)
+  }
+  
+  var getNextYear = function(e) {
+      currentYear += 1;
+      userAge += 1;
+      if (userAge > yearsOfExistence) {
+          currentYear -= 1;
+          userAge -= 1;
+          console.log("Don't time jump! The news hasn't been written yet!")
+          e.preventDefault()
+      } else
+          getArticles()
+  }
+  
+  var getPreviousYear = function(e) {
+      currentYear -= 1;
+      userAge -= 1;
+      if (userAge === -1) {
+          currentYear += 1;
+          userAge += 1;
+          console.log("You weren't born yet!")
+          e.preventDefault()
+      } else
+          getArticles()
+  }
+  
+  var saveToBookmark = function(e) {
+    e.preventDefault()
+    console.log("clicked")
+    let folderName = document.querySelector('.article_container .folder_name')
+ 
+    folderName.value = "My Articles"
+    
+    const bookmarkForm = document.querySelector('.article_container form')
+    fetch(`/api/articles/bookmarks?article_id=${articleId.value}&folder_name=${folderName.value}`, {method: "post"})
+    .then(res => res.json())
+    .then(data => console.log(data))
+  }
+  
+  window.addEventListener('load', getArticles)
+  nextYearBtn.addEventListener('click', getNextYear)
+  previousYearBtn.addEventListener('click', getPreviousYear)
+  icon.addEventListener('click', saveToBookmark)
 </script>
