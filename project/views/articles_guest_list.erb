@@ -6,19 +6,22 @@
 </div>
 
 <div class="article_content hidden">
-  <form action="/articles/bookmarks" method="post">
-    <input class="article_id" type="hidden" name="article_id"/>
-    <input class="folder_name" type="hidden" name="folder_name"/>
-    <i class="cake-btn hidden fas fa-birthday-cake fa-2x"></i>
-  </form>
+ 
   <div class="main_article">
     <p class="previous hidden"><i class="fas fa-angle-left fa-2x"></i></p>
-    <div>
-      <div class="article_top">
+    <div class="article-container">
+      <div class="article-top">
         <p class="date"></p>
       </div>
-      <div class="article_bottom">
-        <h2 class="article-header"></h2> 
+      <div class="article-bottom">
+        <form action="/articles/bookmarks" method="post">
+          <input class="article_id" type="hidden" name="article_id"/>
+          <input class="folder_name" type="hidden" name="folder_name"/>
+          <div class="article-header">
+            <h4></h4> 
+            <i class="cake-btn fas fa-birthday-cake fa-2x"></i>
+          </div>
+        </form>
         <p class="result"></p>
       </div>
     </div>
@@ -33,7 +36,7 @@ const articleId = document.querySelector('.article_id')
 const categories = document.querySelector('.categories')
 const articleContent = document.querySelector('.article_content')
 const result = document.querySelector('.result')
-const title = document.querySelector('h2')
+const title = document.querySelector('h4')
 const publishedDate = document.querySelector('.date')
 const nextBtn = document.querySelector('.next')
 const previousBtn = document.querySelector('.previous')
