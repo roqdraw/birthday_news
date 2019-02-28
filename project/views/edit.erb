@@ -6,13 +6,11 @@
     <i style="color: <%= current_user.color %>;" id="icon" class="user fas fa-user-circle fa-5x"></i>
     
     <div class="wrapper">
-      
-      <ul class="color-list">
-        <% ["orange", "green", "white", "pink", "grey", "blue"].each do |color| %>
-          <li class="color"><%= color %></li>
-        <% end %>
-      </ul>
-
+        <ul class="color-list hidden">
+          <% ["orange", "green", "white", "pink", "grey", "blue"].each do |color| %>
+            <li class="color"><%= color %></li>
+          <% end %>
+        </ul>
     </div>
   </div>
 
@@ -61,9 +59,9 @@
 
 var colorList = document.querySelector('.color-list')
 var selectBtn = document.querySelector('.select')
+var iconColor = document.querySelector('#icon')
 
 var handleClick = (e) => {
-  var iconColor = document.querySelector('#icon')
   iconColor.style.color = e.target.textContent;
   user.style.color = e.target.textContent;
   document.querySelector('.inputColor').value = e.target.textContent;
@@ -72,4 +70,9 @@ var handleClick = (e) => {
 colorList.addEventListener('click', handleClick)
 
 
+var showDropdown = (e) => {
+  colorList.classList.toggle('hidden')
+}
+
+iconColor.addEventListener('click', showDropdown)
 </script>
