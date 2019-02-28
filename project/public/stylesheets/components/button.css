@@ -14,3 +14,17 @@ button {
   border-radius: 20px;
   cursor: pointer;
 }
+
+.hidden-one {
+  opacity: 0;
+}
+
+#no-next {
+  color: rgba(17, 71, 102, 0.5);
+  cursor: not-allowed;
+}
+
+#no-previous {
+  color: rgba(17, 71, 102, 0.5);
+  cursor: not-allowed;
+}

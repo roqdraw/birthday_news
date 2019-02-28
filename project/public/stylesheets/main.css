@@ -54,11 +54,12 @@ body{
   padding-top: 0;
   text-align: center;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   height: 100vh;
   background-size: 100%;
   width: 70%;
   margin: 0 auto;
+  margin-top: 50px;
 }
 
 a {
@@ -66,12 +67,16 @@ a {
 }
 
 .content {
-  width: 80%;
+  width: 70%;
   margin-top: 20px;
 }
 
 .hidden {
   display: none;
+}
+
+.hidden-arrows {
+  opacity: 0.5;
 }
 
 i:hover {
@@ -160,6 +165,7 @@ i:hover {
 }
 
 .jump-in {
+  margin-top: 60px;
   margin-bottom: 40px;
 }
 
@@ -195,7 +201,7 @@ i:hover {
 
 .select-date {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
 }
 
@@ -264,6 +270,10 @@ i:hover {
 
 /* Getting Articles */
 
+.article_container {
+  margin: 0 auto;
+}
+
 .display-article {
   width: 100%;
   display: flex;
@@ -275,7 +285,7 @@ i:hover {
 .article-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
 }
 
 .article-top {
@@ -292,8 +302,8 @@ i:hover {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background-color: rgb(228, 221, 221);
-  padding: 10px 30px;
+  background-color: rgb(240, 229, 229);
+  padding: 20px 30px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.1)
@@ -309,7 +319,7 @@ i:hover {
 }
 
 .article-result {
-  width: 80%;
+  width: 100%;
   margin-top: 30px;
   display: flex;
   justify-content: flex-start;
@@ -318,8 +328,14 @@ i:hover {
 .cake-btn {
   color: rgb(17, 71, 102);
   transition: 1s;
+  margin-left: 30px;
 }
 
 .cake-btn:hover {
   color: rgb(3, 42, 65);
+}
+
+.main {
+  display: flex;
+  align-items: center;
 }

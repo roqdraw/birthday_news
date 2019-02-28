@@ -5,15 +5,18 @@
   <button>foreign</button>
 </div>
 
-<div class="article_container">
-  <form action="/articles/bookmarks" method="post">
-    <input class="article_id" type="hidden" name="article_id"/>
-    <input class="folder_name" type="hidden" name="folder_name"/>
-    <i class="hidden fas fa-birthday-cake fa-2x"></i>
-  </form>
+<div class="main">
+  <p class="next hidden hidden-arrows"><i class="fas fa-angle-left fa-2x"></i></p>
+  <div class="article_container">
+    <form action="/articles/bookmarks" method="post">
+      <input class="article_id" type="hidden" name="article_id"/>
+      <input class="folder_name" type="hidden" name="folder_name"/>
+      <i class="hidden fas fa-birthday-cake fa-2x"></i>
+    </form>
+  </div>
+  <p class="previous hidden hidden-arrows"><i class="fas fa-angle-right fa-2x"></i></p>
 </div>
-<p class="next hidden"><i class="fas fa-angle-right fa-2x"></i></p>
-<p class="previous hidden"><i class="fas fa-angle-left fa-2x"></i></p>
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
     const articleId = document.querySelector('.article_id')
@@ -102,13 +105,19 @@
             articleBottom.appendChild(articleSummary);
 
             if (currentYear === unchangeableYear) {
-                nextYearBtn.classList.add('hidden')
+                nextYearBtn.classList.add('hidden-arrows')
+                previousYearBtn.classList.remove('hidden-arrows')
+                nextYearBtn.classList.remove('hidden')
                 previousYearBtn.classList.remove('hidden')
             } else if (currentYear === birthYear) {
                 console.log(currentYear, birthYear)
-                previousYearBtn.classList.add('hidden')
+                previousYearBtn.classList.add('hidden-arrows')
+                nextYearBtn.classList.remove('hidden-arrows')
                 nextYearBtn.classList.remove('hidden')
+                previousYearBtn.classList.remove('hidden')
             } else {
+                nextYearBtn.classList.remove('hidden-arrows')
+                previousYearBtn.classList.remove('hidden-arrows')
                 nextYearBtn.classList.remove('hidden')
                 previousYearBtn.classList.remove('hidden')
             }
@@ -116,7 +125,7 @@
         }
 
         var options = {
-            url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=xowFFypBoDXFSCp6TjUuwy5mPmY1H6Ra`
+            url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`
         };
 
         $.ajax(options).done(getSingleArticle)
