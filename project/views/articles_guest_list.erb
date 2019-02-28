@@ -7,7 +7,11 @@
 
 <div class="article_content">
   <h2></h2> 
-  <i class="hidden fas fa-birthday-cake fa-2x"></i>
+  <form action="/articles/bookmarks" method="post">
+    <input class="title_inputs" type="hidden" name="article_id"/>
+    <input class="folder_name" type="hidden" name="folder_name"/>
+    <i class="hidden fas fa-birthday-cake fa-2x"></i>
+  </form>
   <p class="date"></p>
   <p class="result"></p>
   <p class="next hidden">Next Year</p>
@@ -17,8 +21,10 @@
 
 <script>
 const icon = document.querySelector('.article_content i')
+
 const categories = document.querySelector('.categories')
 const articleContent = document.querySelector('.article_content')
+const input = document.querySelector('.article_content input')
 const result = document.querySelector('.result')
 const title = document.querySelector('h2')
 const publishedDate = document.querySelector('.date')
@@ -27,38 +33,57 @@ const previousBtn = document.querySelector('.previous')
 
 const birthYear = <%=@year%>;
 const currentYear = new Date().getFullYear()
-const defaultDate = new Date()
-defaultDate.setMonth(<%=@month%> -1)
-defaultDate.setDate(<%=@day%>)
-
-
+const selectedDate = new Date()
+selectedDate.setMonth(<%=@month%> -1)
+selectedDate.setDate(<%=@day%>)
 
 function getArticle(category) {
-  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&fq=pub_date:${defaultDate.getFullYear()}-${defaultDate.getMonth() + 1}-${defaultDate.getDate()}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`)
+  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&fq=pub_date:${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`)
   .then(res => res.json())
   .then(data => {
+    console.log(data)
     icon.classList.remove('hidden')
-    if (defaultDate.getFullYear() === currentYear) {
-    nextBtn.classList.add('hidden')
-    previousBtn.classList.remove('hidden')
-  } else if (defaultDate.getFullYear() === birthYear) {
-    previousBtn.classList.add('hidden')
-    nextBtn.classList.remove('hidden')
-  } else {
-    nextBtn.classList.remove('hidden')
-    previousBtn.classList.remove('hidden')
-  }
+    const nextDate = new Date(selectedDate).setYear(selectedDate.getFullYear() + 1)
+    
+    
+    if(nextDate > new Date() ) {
+      nextBtn.classList.add('hidden')
+    } else {
+      nextBtn.classList.remove('hidden')
+    }
+    if (selectedDate.getFullYear() === birthYear) {
+      previousBtn.classList.add('hidden')
+    } else {
+      previousBtn.classList.remove('hidden')
+    } 
+  
+    if(data === []) {
+      result.textContent = "Sorry, We cannot find any articles for this year!"
+      return
+    }
+
+    // const randomNum = Math.floor(Math.random() * data.response.docs.length)
+    
+    num = 0
+    if(data.response.docs[num].lead_paragraph === undefined) {
+      result.textContent = data.response.docs[num+=1].lead_paragraph 
+    } else {
+      console.log(data.response.docs[num].lead_paragraph)
+      result.textContent = data.response.docs[num].lead_paragraph
+    }
+    title.textContent = data.response.docs[num].headline.main
+    input.value = data.response.docs[num]._id
 
     const anchor = document.createElement('a')
-    anchor.setAttribute('href', data.response.docs[0].web_url)
+    anchor.setAttribute('href', data.response.docs[1].web_url)
     anchor.textContent = "[...]"
     result.appendChild(anchor)
-    publishedDate.textContent = data.response.docs[0].pub_date.slice(0,10).replace(/-/g, " ") 
+    publishedDate.textContent = data.response.docs[1].pub_date.slice(0,10).replace(/-/g, " ")
   })
 }
 
-if(defaultDate > new Date()) {
-  defaultDate.setYear(defaultDate.getFullYear()-1)
+if(selectedDate > new Date()) {
+  selectedDate.setYear(selectedDate.getFullYear()-1)
   getArticle("election")
 } else {
   getArticle("election")
@@ -71,19 +96,32 @@ function differentCategory(e) {
 
 
 function previousPage(e) {
-  if(defaultDate.getFullYear() === birthYear) {
+  if(selectedDate.getFullYear() === birthYear) {
     return
   }
-  defaultDate.setYear(defaultDate.getFullYear() - 1)
+  selectedDate.setYear(selectedDate.getFullYear() - 1)
   getArticle("election")
 }
 
 function nextPage(e) {
-  if(defaultDate.getFullYear() === currentYear) {
+  if(selectedDate.getFullYear() === currentYear) {
     return
   }
-  defaultDate.setYear(defaultDate.getFullYear() + 1)
+  selectedDate.setYear(selectedDate.getFullYear() + 1)
   getArticle("election")
+}
+
+function saveToBookmark(e) {
+  e.preventDefault()
+  const promptValue = prompt("Please enter the folder name", "ex)Grandma")
+  let folderName = document.querySelector('.article_content .folder_name')
+  if(promptValue === null) {
+    return
+  }
+  folderName.value = promptValue
+  
+  const bookmarkForm = document.querySelector('.article_content form')
+  bookmarkForm.submit()
 }
 
 nextBtn.addEventListener('click', nextPage)

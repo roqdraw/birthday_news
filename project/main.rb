@@ -79,10 +79,35 @@ get '/articles/guest' do
   erb :articles_guest_list
 end
 
-get '/articles/bookmarks' do 
+get '/articles/bookmarks' do
+  @bookmarks = Bookmark.where(user_id: current_user.id)
+  @guests = Bookmark.all
   erb :bookmark
 end
 
+get '/api/articles/bookmarks/categories' do
+  bookmarks = Bookmark.where(guest_name: params[:guest_name])
+  binding.pry
+  content_type "application/json"
+  bookmarks.to_json
+end
+
+get '/api/articles/bookmarks' do
+  guests = Bookmark.all
+  content_type "application/json"
+  guests.to_json
+end
+
+post '/articles/bookmarks' do
+  bookmark = Bookmark.new
+  bookmark.user_id = current_user.id
+  bookmark.article_id = params[:article_id]
+  bookmark.guest_name = params[:folder_name]
+  bookmark.save
+
+  redirect '/articles/bookmarks'
+end
+ 
 get '/articles/:id' do
   @user = User.find_by(id: current_user.id)
   erb :articles_list

@@ -12,19 +12,10 @@ function showUserSetting(e) {
 }
 
 
-function showMenu(e) {
-  if(list.classList.contains('hidden')) {
-    list.classList.remove('hidden')
-  } else {
-    list.classList.add('hidden')
-  }
-  
-}
-console.log(userSetting)
 
 
 if(userSetting !== null) {
   user.addEventListener('click', showUserSetting)
 }
-menu.addEventListener('click', showMenu)
+
 

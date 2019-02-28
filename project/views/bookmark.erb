@@ -1,1 +1,46 @@
-<p>hello</p>
+<div class="folders">
+  <form>
+    <input name="guest_name" type="hidden"/>
+  </form>
+</div>
+<h2></h2>
+
+<p class="date"></p>
+<p class="result"></p>
+
+<script>
+const result = document.querySelector('.result')
+const title = document.querySelector('h2')
+const publishedDate = document.querySelector('.date')
+let bookmarks = []; 
+
+function submitForm(e) {
+  e.preventDefault()
+  fetch('/api/articles/bookmarks/categories')
+  .then(res => res.json())
+  .then(data => {
+    console.log(data)
+  })
+}
+
+fetch("/api/articles/bookmarks")
+  .then(res => res.json())
+  .then(data => {
+    console.log(data)
+    data.forEach(bookmark => {
+      if(bookmarks.indexOf(bookmark.guest_name) === -1){
+        bookmarks.push(bookmark.guest_name)
+      }    
+    })
+    bookmarks.forEach(folderName => {
+      const folders = document.querySelector('.folders') 
+      const categoryForm = document.querySelector('.folders form')
+      const categoryBtn = document.createElement('button')
+      categoryBtn.textContent = folderName
+      categoryBtn.addEventListener('click', submitForm)
+      categoryForm.appendChild(categoryBtn)
+    })
+  })
+
+
+</script>
