@@ -6,9 +6,9 @@
 </div>
 
 <div class="article_content hidden">
- 
-  <div class="main_article">
-    <p class="previous hidden"><i class="fas fa-angle-left fa-2x"></i></p>
+ <main>
+  <div class="main">
+    <p class="previous"><i class="fas fa-angle-left fa-2x"></i></p>
     <div class="article-container">
       <div class="article-top">
         <p class="date"></p>
@@ -25,13 +25,13 @@
         <p class="result"></p>
       </div>
     </div>
-    <p class="next hidden"><i class="fas fa-angle-right fa-2x"></i></p>
+    <p class="next"><i class="fas fa-angle-right fa-2x"></i></p>
   </div>
 </div>
 
 
 <script>
-const icon = document.querySelector('.article_content i')
+const icon = document.querySelector('.article_content .cake-btn')
 const articleId = document.querySelector('.article_id')
 const categories = document.querySelector('.categories')
 const articleContent = document.querySelector('.article_content')
@@ -48,24 +48,23 @@ selectedDate.setMonth(<%=@month%> -1)
 selectedDate.setDate(<%=@day%>)
 
 function getArticle(category) {
-  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&fq=pub_date:${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}&api-key=xowFFypBoDXFSCp6TjUuwy5mPmY1H6Ra`)
+  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&fq=pub_date:${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`)
   .then(res => res.json())
   .then(data => {
     articleContent.classList.remove('hidden')
     console.log(data)
-    icon.classList.remove('hidden')
     const nextDate = new Date(selectedDate).setYear(selectedDate.getFullYear() + 1)
     
     
     if(nextDate > new Date() ) {
-      nextBtn.classList.add('hidden')
+      nextBtn.classList.add('fade')
     } else {
-      nextBtn.classList.remove('hidden')
+      nextBtn.classList.remove('fade')
     }
     if (selectedDate.getFullYear() === birthYear) {
-      previousBtn.classList.add('hidden')
+      previousBtn.classList.add('fade')
     } else {
-      previousBtn.classList.remove('hidden')
+      previousBtn.classList.remove('fade')
     } 
   
     if(data === []) {
@@ -74,12 +73,13 @@ function getArticle(category) {
     }
     
     num = 0
-    if(data.response.docs[num].lead_paragraph === undefined) {
-      result.textContent = data.response.docs[num+=1].lead_paragraph 
-    } else {
-      console.log(data.response.docs[num].lead_paragraph)
-      result.textContent = data.response.docs[num].lead_paragraph
-    }
+    if(data.response)
+    if(data.response.docs.length === 0) {
+      result.textContent = "We couldn't find anything for this year"
+      return
+    } 
+    console.log(data.response.docs[num].lead_paragraph)
+    result.textContent = data.response.docs[num].lead_paragraph
     title.textContent = data.response.docs[num].headline.main
     articleId.value = data.response.docs[num]._id
 
@@ -117,6 +117,7 @@ function nextPage(e) {
   if(selectedDate.getFullYear() === currentYear) {
     return
   }
+  
   selectedDate.setYear(selectedDate.getFullYear() + 1)
   getArticle("election")
 }

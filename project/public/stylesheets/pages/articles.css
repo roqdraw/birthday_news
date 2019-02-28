@@ -48,3 +48,13 @@
   display: flex;
   justify-content: flex-start;
 }
+
+.content_wrapper .next, .content_wrapper .previous {
+  width: 1em
+}
+
+.fade {
+  opacity: 0.5;
+
+}
+
