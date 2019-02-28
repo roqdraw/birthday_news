@@ -242,6 +242,10 @@ i:hover {
   margin: 5px 0;
 }
 
+.username {
+  color: rgb(17, 71, 102);;
+}
+
 /* About Page */
 
 .profile-img {
@@ -258,6 +262,10 @@ i:hover {
   transition: all 1s;
 }
 
+.profile-div:hover {
+  width: 25%;
+}
+
 .linkedin, .github {
   color: white;
   margin: 0 2%;
@@ -265,7 +273,7 @@ i:hover {
 }
 
 .linkedin:hover, .github:hover {
-  color: rgb(66, 68, 85);
+  color: rgb(148, 151, 176);
   margin: 0 2%;
 }
 
