@@ -52,9 +52,7 @@ function getArticle(category) {
   .then(res => res.json())
   .then(data => {
     articleContent.classList.remove('hidden')
-    console.log(data)
     const nextDate = new Date(selectedDate).setYear(selectedDate.getFullYear() + 1)
-    
     
     if(nextDate > new Date() ) {
       nextBtn.classList.add('fade')
@@ -84,10 +82,10 @@ function getArticle(category) {
     articleId.value = data.response.docs[num]._id
 
     const anchor = document.createElement('a')
-    anchor.setAttribute('href', data.response.docs[1].web_url)
+    anchor.setAttribute('href', data.response.docs[num].web_url)
     anchor.textContent = "[...]"
     result.appendChild(anchor)
-    publishedDate.textContent = data.response.docs[1].pub_date.slice(0,10).replace(/-/g, " ")
+    publishedDate.textContent = data.response.docs[num].pub_date.slice(0,10).replace(/-/g, " ")
   })
 }
 
