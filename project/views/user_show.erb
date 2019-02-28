@@ -1,21 +1,40 @@
 
 <% if logged_in? %>
 
-  <div class="userDetail">
-    <p class="firstName"></p>
-    <p class="lastName"></p>
-    <p class="birthDate"></p>
+  <div class="combine_divs">
+
+  <div class="user_icon">
+
+    <i style="color: <%= current_user.color %>;" id="icon" class="user fas fa-user-circle fa-5x"></i>
+    
+    <div class="wrapper">
+        <ul class="color-list hidden">
+          <% ["orange", "green", "white", "pink", "grey", "blue"].each do |color| %>
+            <li class="color"><%= color %></li>
+          <% end %>
+        </ul>
+    </div>
   </div>
+  
+  
+  <div class="userDetailform">
+    <div class="userDetail">
+      <p class="firstName"></p>
+      <p class="lastName"></p>
+      <p class="birthDate"></p>
+    </div>
 
-  <h3>Frequent Categories</h3>
+    <h3>Frequent Categories</h3>
 
-  <ul class="categories">
-  </ul>
+    <ul class="categories">
+    </ul>
 
-  <h3><a href="/articles/bookmarks"> Bookmarked Articles</h3>
+    <h3><a href="/articles/bookmarks"> Bookmarked Articles</h3>
+  </div>
 <% end %>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 <script>
 
  var appendCategory = (name, count) => {
@@ -51,12 +70,12 @@
 
       })
       
-      var topFiveCats = Object.keys(searchResult).map( k => {
-        return {count: searchResult[k].length, name: k };
-      }).sort((a, b) => b.count - a.count).slice(0,5);
-      topFiveCats.forEach( hash => {
-        appendCategory(hash.name, hash.count);      
-      });
+    var topFiveCats = Object.keys(searchResult).map( k => {
+      return {count: searchResult[k].length, name: k };
+    }).sort((a, b) => b.count - a.count).slice(0,5);
+    topFiveCats.forEach( hash => {
+      appendCategory(hash.name, hash.count);      
+    });
 
     });
 
