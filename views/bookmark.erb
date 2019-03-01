@@ -83,6 +83,8 @@
   
   function getBookmarkArticles(e) {
     const bookmarkWrapper = document.querySelector('.bookmark_wrapper')
+    const folders = document.querySelector('.folders')
+    folders.innerHTML = ""
     bookmarkWrapper.innerHTML = ""
     fetch(`/api/articles/bookmarks/categories?guest_name=${e.target.value}`)
     .then(res => res.json())
