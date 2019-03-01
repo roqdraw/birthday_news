@@ -1,5 +1,7 @@
 # WHYB
 
+https://birthday-news.herokuapp.com/
+
 ### Technologies Used
 
 - HTML & CSS 
@@ -57,10 +59,10 @@ If they search manually to check with somebody else's birthday, they can save th
 
 ### Link to your wireframes – sketches of major views / interfaces in your application
 
-Link
+https://github.com/roqdraw/birthday_news/blob/master/public/images/plan.pdf
 
 --------------------------------------
 
 ### Link to your diagrams - database schema
 
-Link
+https://github.com/roqdraw/birthday_news/blob/master/public/images/plan_table.pdf
