@@ -38,6 +38,8 @@
     var yearsOfExistence = currentYear - birthYear;
     var counter = 0;
 
+    var apiKey = ''
+
     var getArticles = (category) => {
 
         var getSingleArticle = res => {
@@ -49,11 +51,9 @@
             }
 
             if (res.response.docs.length === 0) {
-                console.log("Sorry, but your birthday hasn't hit yet this year!")
-                console.log("Here's the previous birthday's news.")
                 currentYear -= 1;
                 unchangeableYear -= 1;
-                getArticles()
+                getArticles(category)
             } else {
 
                 var displayArticle = document.createElement('div');
@@ -77,11 +77,6 @@
                 var dateSplit = pub_date.split('').splice(0,10).join('').split('-').join(' ')
 
                 articleId.value = firstArticle._id
-                
-                // var articleCategory = document.createElement('p');
-                // articleCategory.textContent = firstArticle.section_name;
-                // articleCategory.classList.add("article-category")
-                // articleTop.appendChild(articleCategory)
 
                 var articleDate = document.createElement('p');
                 articleDate.textContent = dateSplit;
@@ -127,9 +122,10 @@
         }
 
         var options = {
-            url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp`
+            url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=arvjY8M1DI1AaqDdOEQJv3ArJ3hQ9i6q`
         };
 
+        console.log('sdfsf',category)
         $.ajax(options).done(getSingleArticle)
     }
 
@@ -137,17 +133,20 @@ function differentCategory(e) {
   getArticles(e.target.textContent)
 }
 
-    var getNextYear = function(e) {
-        currentYear += 1;
-        userAge += 1;
-        if (userAge > yearsOfExistence) {
-            currentYear -= 1;
-            userAge -= 1;
-            console.log("Don't time jump! The news hasn't been written yet!")
-            e.preventDefault()
-        } else 
-            getArticles("election")
-    }
+var getNextYear = function(e) {
+    currentYear += 1;
+    userAge += 1;
+    if (userAge > yearsOfExistence) {
+        currentYear -= 1;
+        userAge -= 1;
+        console.log("Don't time jump! The news hasn't been written yet!")
+        e.preventDefault()
+    } else 
+        getArticles("election")
+}
+
+
+getArticles("election")
 
     var getPreviousYear = function(e) {
         currentYear -= 1;
@@ -174,7 +173,7 @@ function differentCategory(e) {
       .then(data => console.log(data))
     }
 
-    window.addEventListener('load', getArticles)
+    // window.addEventListener('load', getArticles)
     nextYearBtn.addEventListener('click', getNextYear)
     previousYearBtn.addEventListener('click', getPreviousYear)
     icon.addEventListener('click', saveToBookmark)

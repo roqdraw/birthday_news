@@ -50,7 +50,7 @@
   }
   
   function getArticleById(articleId, bookmarkWrapper) {
-    fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=_id:${articleId}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp&fbclid=IwAR1sRSz0MFrUI2-x6Vi5m6OlmSQzW2LcU8W_3aU0E3iHLx_z_PKmJCBJRWc`)
+    fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=_id:${articleId}&api-key=uzhiChWGnnVDUYfkdiWIdSA6oXxHyV5I&fbclid=IwAR1sRSz0MFrUI2-x6Vi5m6OlmSQzW2LcU8W_3aU0E3iHLx_z_PKmJCBJRWc`)
     .then(res => res.json())
     .then(data => {
       fetch("/api/articles/bookmarks")
@@ -63,7 +63,7 @@
       })
       const loading = document.querySelector('.loading')
       loading.classList.add('hidden')
-
+      console.log(data)
       data.response.docs.forEach(article => {
       createArticleStructure(article, bookmarkWrapper)
       })
