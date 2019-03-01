@@ -49,7 +49,7 @@ If they search manually to check with somebody else's birthday, they can save th
 6. Locating and ignoring outdated and incomplete json data from NewYorkTimes API.
 
 #### Unsolved Problems
-1. Making the functionality to deleet bookmarks.
+1. Making the functionality to delete bookmarks.
 2. Did not manage to make the home and about icon smoothly trasnsition to the words.
 3. Alignment of banner icons is off when shrtinking the browser window.
 
@@ -57,6 +57,10 @@ If they search manually to check with somebody else's birthday, they can save th
 
 ### Link to your wireframes – sketches of major views / interfaces in your application
 
+Link
+
 --------------------------------------
 
 ### Link to your diagrams - database schema
+
+Link
