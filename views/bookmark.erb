@@ -8,34 +8,66 @@
   let bookmarks = [];
   
   function createArticleStructure(article, bookmarkWrapper) {
-    const articleContainer = document.createElement('div')
-    const heading = document.createElement('h2')
-    heading.textContent = article.headline.main
-    const date = document.createElement('p')
-    date.textContent = article.pub_date.slice(0, 10).replace(/-/g, " ")
-    const para = document.createElement('p')
-    para.textContent = article.lead_paragraph
-    const anchor = document.createElement('a')
-    anchor.setAttribute('href', article.web_url)
-    anchor.textContent = "[...]"
-    para.appendChild(anchor)
-    articleContainer.appendChild(heading)
-    articleContainer.appendChild(date)
-    articleContainer.appendChild(para)
-    bookmarkWrapper.appendChild(articleContainer)
+    bookmarkWrapper = document.querySelector('.bookmark_wrapper')
+
+    var bookmarkContainer = document.createElement('div')
+    bookmarkContainer.classList.add('.bookmark-container')
+    bookmarkWrapper.appendChild(bookmarkContainer)
+
+    var displayArticle = document.createElement('div')
+    displayArticle.classList.add("display-article")
+    bookmarkContainer.appendChild(displayArticle)
+
+    var articleTop = document.createElement('div');
+    articleTop.classList.add("article-top");
+    displayArticle.appendChild(articleTop)
+
+    var articleBottom = document.createElement('div');
+    articleBottom.classList.add("article-bottom");
+    displayArticle.appendChild(articleBottom)
+
+    var articleHeader = document.createElement('div');
+    articleHeader.classList.add("article-header");
+    articleBottom.appendChild(articleHeader)
+
+    var articleTitle = document.createElement('h4')
+    articleTitle.textContent = article.headline.main
+    articleHeader.appendChild(articleTitle)
+
+    var articleDate = document.createElement('p')
+    articleDate.textContent = article.pub_date.slice(0, 10).replace(/-/g, " ")
+    articleDate.classList.add("article-date");
+    articleTop.appendChild(articleDate)
+
+    var articleSummary = document.createElement('p')
+    articleSummary.textContent = article.lead_paragraph
+    articleBottom.appendChild(articleSummary)
+
+    var articleLink = document.createElement('a')
+    articleLink.setAttribute('href', article.web_url)
+    articleLink.textContent = "[...]"
+    articleSummary.appendChild(articleLink)
   }
-  
-  // id("id1" "id2" "id3")
   
   function getArticleById(articleId, bookmarkWrapper) {
     fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=_id:${articleId}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp&fbclid=IwAR1sRSz0MFrUI2-x6Vi5m6OlmSQzW2LcU8W_3aU0E3iHLx_z_PKmJCBJRWc`)
     .then(res => res.json())
     .then(data => {
-      var loading = document.querySelector('.loading')
+      fetch("/api/articles/bookmarks")
+      .then(res => res.json())
+      .then(bookmarksData => {
+        bookmarksData.forEach(bookmark => {
+          if(bookmarks.indexOf(bookmark.guest_name) === -1){
+            bookmarks.push(bookmark.guest_name)
+        }
+      })
+       var loading = document.querySelector('.loading')
       loading.classList.add('hidden')
+
       data.response.docs.forEach(article => {
       createArticleStructure(article, bookmarkWrapper)
-     
+      })
+
       bookmarks.forEach(folderName => {
         const folders = document.querySelector('.folders')
         const categoryBtn = document.createElement('button')
@@ -43,11 +75,11 @@
         categoryBtn.value = folderName
         categoryBtn.addEventListener('click', getBookmarkArticles)
         folders.appendChild(categoryBtn)
-        })
       })
     })
+     
+    })
   }
-  
   
   function getBookmarkArticles(e) {
     const bookmarkWrapper = document.querySelector('.bookmark_wrapper')
@@ -60,9 +92,6 @@
     })
   }
   
-
-  
-
   fetch("/api/articles/bookmarks/categories?guest_name=My Articles")
     .then(res => res.json())
     .then(data => {
@@ -71,17 +100,5 @@
       var ids = data.map(article =>  `"${article.article_id}"`)
       getArticleById(`(${ids.join(" ")})`, bookmarkWrapper)
     })
-   
-
-  fetch("/api/articles/bookmarks")
-    .then(res => res.json())
-    .then(data => {
-      data.forEach(bookmark => {
-        if(bookmarks.indexOf(bookmark.guest_name) === -1){
-          bookmarks.push(bookmark.guest_name)
-        }
-      })
-    })
-  
 
 </script>
