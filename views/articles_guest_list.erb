@@ -51,6 +51,7 @@ function getArticle(category) {
   .then(res => res.json())
   .then(data => {
     articleContent.classList.remove('hidden')
+    categories.classList.remove('hidden')
     const nextDate = new Date(selectedDate).setYear(selectedDate.getFullYear() + 1)
     
     if(nextDate > new Date() ) {
@@ -75,7 +76,6 @@ function getArticle(category) {
       result.textContent = "We couldn't find anything for this year"
       return
     } 
-    console.log(data.response.docs[num].lead_paragraph)
     result.textContent = data.response.docs[num].lead_paragraph
     title.textContent = data.response.docs[num].headline.main
     articleId.value = data.response.docs[num]._id
