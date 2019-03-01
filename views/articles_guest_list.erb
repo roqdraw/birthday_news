@@ -47,7 +47,7 @@ selectedDate.setMonth(<%=@month%> -1)
 selectedDate.setDate(<%=@day%>)
 
 function getArticle(category) {
-  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&fq=pub_date:${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}&api-key=arvjY8M1DI1AaqDdOEQJv3ArJ3hQ9i6q`)
+  fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&fq=pub_date:${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}&api-key=uzhiChWGnnVDUYfkdiWIdSA6oXxHyV5I`)
   .then(res => res.json())
   .then(data => {
     articleContent.classList.remove('hidden')

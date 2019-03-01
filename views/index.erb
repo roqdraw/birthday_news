@@ -65,7 +65,7 @@
   function getArticle() {
     var randomYear = Math.floor(Math.random() * (2019 - 1900 + 1)) + 1900;
     var randomCategory = category[Math.floor(Math.random()*category.length)];
-    fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${randomCategory}&fq=pub_date:${randomYear}-${defaultMonth}-${defaultDay}&api-key=xowFFypBoDXFSCp6TjUuwy5mPmY1H6Ra`)
+    fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${randomCategory}&fq=pub_date:${randomYear}-${defaultMonth}-${defaultDay}&api-key=uzhiChWGnnVDUYfkdiWIdSA6oXxHyV5I`)
     .then(res => res.json())
     .then(data => {
       var homepage = document.querySelector('.homepage')
