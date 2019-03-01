@@ -63,7 +63,7 @@
       })
       const loading = document.querySelector('.loading')
       loading.classList.add('hidden')
-
+      console.log(data)
       data.response.docs.forEach(article => {
       createArticleStructure(article, bookmarkWrapper)
       })
