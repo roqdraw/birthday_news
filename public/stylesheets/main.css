@@ -306,7 +306,7 @@ i:hover {
 
 .article-top {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   background-color: rgb(17, 71, 102);
   color: white;
   padding: 0 30px;
