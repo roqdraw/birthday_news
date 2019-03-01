@@ -56,74 +56,74 @@
                 getArticles()
             } else {
 
-            var displayArticle = document.createElement('div');
-            displayArticle.classList.add("display-article");
-            articleContainer.appendChild(displayArticle);
+                var displayArticle = document.createElement('div');
+                displayArticle.classList.add("display-article");
+                articleContainer.appendChild(displayArticle);
 
-            var articleTop = document.createElement('div');
-            articleTop.classList.add("article-top");
-            displayArticle.appendChild(articleTop)
+                var articleTop = document.createElement('div');
+                articleTop.classList.add("article-top");
+                displayArticle.appendChild(articleTop)
 
-            var articleBottom = document.createElement('div');
-            articleBottom.classList.add("article-bottom");
-            displayArticle.appendChild(articleBottom)
+                var articleBottom = document.createElement('div');
+                articleBottom.classList.add("article-bottom");
+                displayArticle.appendChild(articleBottom)
 
-            var articleHeader = document.createElement('div');
-            articleHeader.classList.add("article-header");
-            articleBottom.appendChild(articleHeader)
+                var articleHeader = document.createElement('div');
+                articleHeader.classList.add("article-header");
+                articleBottom.appendChild(articleHeader)
 
-            var firstArticle = res.response.docs[counter]
-            var pub_date = firstArticle.pub_date;
-            var dateSplit = pub_date.split('').splice(0,10).join('').split('-').join(' ')
+                var firstArticle = res.response.docs[counter]
+                var pub_date = firstArticle.pub_date;
+                var dateSplit = pub_date.split('').splice(0,10).join('').split('-').join(' ')
 
-            articleId.value = firstArticle._id
-            
-            // var articleCategory = document.createElement('p');
-            // articleCategory.textContent = firstArticle.section_name;
-            // articleCategory.classList.add("article-category")
-            // articleTop.appendChild(articleCategory)
+                articleId.value = firstArticle._id
+                
+                // var articleCategory = document.createElement('p');
+                // articleCategory.textContent = firstArticle.section_name;
+                // articleCategory.classList.add("article-category")
+                // articleTop.appendChild(articleCategory)
 
-            var articleDate = document.createElement('p');
-            articleDate.textContent = dateSplit;
-            articleDate.classList.add("article-date");
-            articleTop.appendChild(articleDate);
+                var articleDate = document.createElement('p');
+                articleDate.textContent = dateSplit;
+                articleDate.classList.add("article-date");
+                articleTop.appendChild(articleDate);
 
-            var articleTitle = document.createElement('h4');
-            articleTitle.textContent = firstArticle.headline.main;
-            articleHeader.appendChild(articleTitle);
+                var articleTitle = document.createElement('h4');
+                articleTitle.textContent = firstArticle.headline.main;
+                articleHeader.appendChild(articleTitle);
 
-            articleHeader.appendChild(icon)
-            icon.classList.remove('hidden')
-            icon.classList.add('cake-btn')
+                articleHeader.appendChild(icon)
+                icon.classList.remove('hidden')
+                icon.classList.add('cake-btn')
 
-            var articleLink = document.createElement('a')
-            articleLink.href = firstArticle.web_url
-            articleLink.innerHTML = "[...]"
+                var articleLink = document.createElement('a')
+                articleLink.href = firstArticle.web_url
+                articleLink.innerHTML = "[...]"
 
-            var articleSummary = document.createElement('p');
-            articleSummary.innerHTML = firstArticle.snippet.slice(0, -3) + ' ';
-            articleSummary.appendChild(articleLink)
-            articleBottom.appendChild(articleSummary);
+                var articleSummary = document.createElement('p');
+                articleSummary.innerHTML = firstArticle.snippet.slice(0, -3) + ' ';
+                articleSummary.appendChild(articleLink)
+                articleBottom.appendChild(articleSummary);
 
-            if (currentYear === unchangeableYear) {
-                nextYearBtn.classList.add('hidden-arrows')
-                previousYearBtn.classList.remove('hidden-arrows')
-                nextYearBtn.classList.remove('hidden')
-                previousYearBtn.classList.remove('hidden')
-            } else if (currentYear === birthYear) {
-                console.log(currentYear, birthYear)
-                previousYearBtn.classList.add('hidden-arrows')
-                nextYearBtn.classList.remove('hidden-arrows')
-                nextYearBtn.classList.remove('hidden')
-                previousYearBtn.classList.remove('hidden')
-            } else {
-                nextYearBtn.classList.remove('hidden-arrows')
-                previousYearBtn.classList.remove('hidden-arrows')
-                nextYearBtn.classList.remove('hidden')
-                previousYearBtn.classList.remove('hidden')
+                if (currentYear === unchangeableYear) {
+                    nextYearBtn.classList.add('hidden-arrows')
+                    previousYearBtn.classList.remove('hidden-arrows')
+                    nextYearBtn.classList.remove('hidden')
+                    previousYearBtn.classList.remove('hidden')
+                } else if (currentYear === birthYear) {
+                    console.log(currentYear, birthYear)
+                    previousYearBtn.classList.add('hidden-arrows')
+                    nextYearBtn.classList.remove('hidden-arrows')
+                    nextYearBtn.classList.remove('hidden')
+                    previousYearBtn.classList.remove('hidden')
+                } else {
+                    nextYearBtn.classList.remove('hidden-arrows')
+                    previousYearBtn.classList.remove('hidden-arrows')
+                    nextYearBtn.classList.remove('hidden')
+                    previousYearBtn.classList.remove('hidden')
+                }
             }
-            }
-          categories.classList.remove('hidden')
+            categories.classList.remove('hidden')
         }
 
         var options = {
