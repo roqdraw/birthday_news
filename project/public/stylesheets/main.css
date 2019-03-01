@@ -128,8 +128,16 @@ i:hover {
 .profile-icon {
   margin: 0 0 0 0.3em;
 }
+.loading {
+  color: rgb(17, 71, 102);
+  margin-top: 10px;
+  animation: spin 2s linear infinite;
+}
 
-
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 /* Index Page */
 .welcome {
   color: rgb(17, 71, 102);

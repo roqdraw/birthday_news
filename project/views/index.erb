@@ -1,8 +1,11 @@
-<div class="homeage hidden">
+<%if logged_in? %>
+  <h2>Hello, <span class="username"><%= current_user.firstname %>.</span></h2>
+  <i class="loading fas fa-spinner fa-5x"></i>
+<%end%>
+
+<div class="homepage hidden">
   <%if logged_in? %>
-    <h2>Hello, <span class="username"><%= current_user.firstname %>.</span></h2>
-      
-      <h3>Some time ago, during one of your birthdays:</h3>
+    <h3>Some time ago, during one of your birthdays:</h3>
       <%# <div class="article_content">
         <h4 class="article-title"></h4> 
         <p class="date"></p>
@@ -29,7 +32,6 @@
           <button class="go-btn">GO</button>
         </div>
       </form>
-    </div>
   <%else%>
     <div class="index">
       <h2>Hello!</h2> 
@@ -66,8 +68,10 @@
     fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${randomCategory}&fq=pub_date:${randomYear}-${defaultMonth}-${defaultDay}&api-key=xowFFypBoDXFSCp6TjUuwy5mPmY1H6Ra`)
     .then(res => res.json())
     .then(data => {
-      var homepage = document.querySelector('homepage')
+      var homepage = document.querySelector('.homepage')
+      var loading = document.querySelector('.loading')
       homepage.classList.remove('hidden')
+      loading.classList.add('hidden')
       if(data.response.docs[0] !== '' && data.response.docs[0] !== undefined && data.response.docs[0].headline.main !== '' && data.response.docs[0].headline.main !== undefined && data.response.docs[0].snippet !== '') {
         var displayArticle = document.createElement('div');
         displayArticle.classList.add("display-article");

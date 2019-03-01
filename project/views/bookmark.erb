@@ -27,7 +27,7 @@
   // id("id1" "id2" "id3")
   
   function getArticleById(articleId, bookmarkWrapper) {
-    fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=_id:${articleId}&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr&fbclid=IwAR1sRSz0MFrUI2-x6Vi5m6OlmSQzW2LcU8W_3aU0E3iHLx_z_PKmJCBJRWc`)
+    fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=_id:${articleId}&api-key=xowFFypBoDXFSCp6TjUuwy5mPmY1H6Ra&fbclid=IwAR1sRSz0MFrUI2-x6Vi5m6OlmSQzW2LcU8W_3aU0E3iHLx_z_PKmJCBJRWc`)
     .then(res => res.json())
     .then(data => {
       data.response.docs.forEach(article => {
@@ -48,12 +48,20 @@
     })
   }
   
-  fetch("/api/articles/bookmarks")
+
+  fetch("/api/articles/bookmarks/categories?guest_name=My Articles")
     .then(res => res.json())
     .then(data => {
-      data.forEach(bookmark => {
-        if(bookmarks.indexOf(bookmark.guest_name) === -1){
-          bookmarks.push(bookmark.guest_name)
+      const bookmarkWrapper = document.querySelector('.bookmark_wrapper')
+      bookmarkWrapper.innerHTML = ""
+      var ids = data.map(article =>  `"${article.article_id}"`)
+      getArticleById(`(${ids.join(" ")})`, bookmarkWrapper)
+      fetch("/api/articles/bookmarks")
+        .then(res => res.json())
+        .then(data => {
+          data.forEach(bookmark => {
+            if(bookmarks.indexOf(bookmark.guest_name) === -1){
+            bookmarks.push(bookmark.guest_name)
         }
       })
       bookmarks.forEach(folderName => {
@@ -66,13 +74,5 @@
       })
     })
   
-  
-  fetch("/api/articles/bookmarks/categories?guest_name=My Articles")
-    .then(res => res.json())
-    .then(data => {
-      const bookmarkWrapper = document.querySelector('.bookmark_wrapper')
-      bookmarkWrapper.innerHTML = ""
-      var ids = data.map(article =>  `"${article.article_id}"`)
-      getArticleById(`(${ids.join(" ")})`, bookmarkWrapper)
-    })
+  })
 </script>
