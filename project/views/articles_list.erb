@@ -1,4 +1,6 @@
-<div class="categories">
+
+ 
+<div class="categories hidden">
   <button>business</button>
   <button>education</button>
   <button>opinion</button>
@@ -122,7 +124,8 @@
                 nextYearBtn.classList.remove('hidden')
                 previousYearBtn.classList.remove('hidden')
             }
-            }
+                categories.classList.remove('hidden')
+            }    
         }
 
         var options = {
@@ -134,7 +137,6 @@
 
 function differentCategory(e) {
   getArticles(e.target.textContent)
-  
 }
 
     var getNextYear = function(e) {
