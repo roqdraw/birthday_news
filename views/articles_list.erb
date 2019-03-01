@@ -38,12 +38,9 @@
     var yearsOfExistence = currentYear - birthYear;
     var counter = 0;
 
-    var apiKey = ''
-
     var getArticles = (category) => {
 
         var getSingleArticle = res => {
-
             var displayDiv = document.querySelector('.display-article')
 
             if ($(".display-article").parents(".article_container").length === 1) {
@@ -118,7 +115,7 @@
                     previousYearBtn.classList.remove('hidden')
                 }
             }
-            categories.classList.remove('hidden')
+           categories.classList.remove('hidden')  
         }
 
         var options = {
