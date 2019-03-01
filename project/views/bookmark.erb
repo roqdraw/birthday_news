@@ -59,12 +59,12 @@
       fetch("/api/articles/bookmarks")
         .then(res => res.json())
         .then(data => {
+          debugger
           data.forEach(bookmark => {
             if(bookmarks.indexOf(bookmark.guest_name) === -1){
             bookmarks.push(bookmark.guest_name)
         }
       })
-      debugger
       bookmarks.forEach(folderName => {
         const folders = document.querySelector('.folders')
         const categoryBtn = document.createElement('button')

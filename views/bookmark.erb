@@ -30,6 +30,7 @@
     fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=_id:${articleId}&api-key=xowFFypBoDXFSCp6TjUuwy5mPmY1H6Ra&fbclid=IwAR1sRSz0MFrUI2-x6Vi5m6OlmSQzW2LcU8W_3aU0E3iHLx_z_PKmJCBJRWc`)
     .then(res => res.json())
     .then(data => {
+      console.log(data)
       data.response.docs.forEach(article => {
       createArticleStructure(article, bookmarkWrapper)
       })
@@ -52,6 +53,7 @@
   fetch("/api/articles/bookmarks/categories?guest_name=My Articles")
     .then(res => res.json())
     .then(data => {
+      debugger
       const bookmarkWrapper = document.querySelector('.bookmark_wrapper')
       bookmarkWrapper.innerHTML = ""
       var ids = data.map(article =>  `"${article.article_id}"`)
@@ -62,9 +64,9 @@
           data.forEach(bookmark => {
             if(bookmarks.indexOf(bookmark.guest_name) === -1){
             bookmarks.push(bookmark.guest_name)
-        }
+            }
       })
-      bookmarks.forEach(folderName => {
+        bookmarks.forEach(folderName => {
         const folders = document.querySelector('.folders')
         const categoryBtn = document.createElement('button')
         categoryBtn.textContent = folderName
