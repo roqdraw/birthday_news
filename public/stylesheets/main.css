@@ -282,12 +282,17 @@ i:hover {
   margin: 0 auto;
 }
 
+.bookmark-container {
+  margin: 50px auto;
+}
+
 .display-article {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
+  margin-bottom: 50px;
 }
 
 .article-header {
