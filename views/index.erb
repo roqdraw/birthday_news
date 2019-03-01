@@ -1,49 +1,52 @@
 <%if logged_in? %>
   <h2>Hello, <span class="username"><%= current_user.firstname %>.</span></h2>
-    
-    <h3>Some time ago, during one of your birthdays:</h3>
-    <%# <div class="article_content">
-      <h4 class="article-title"></h4> 
-      <p class="date"></p>
-      <p class="result"></p>
-    </div> %>
-
-  <div class="article_container">
-    <form action="/articles/bookmarks" method="post">
-      <input class="article_id" type="hidden" name="article_id"/>
-      <input class="folder_name" type="hidden" name="folder_name"/>
-      <%# <i class="hidden fas fa-birthday-cake fa-2x"></i> %>
-    </form>
-  </div>
-
-  <h2 class="jump-in">Let's Jump in!</h2>
-  <a class="get-my-articles" href="/articles/<%= current_user.id%>">Search articles based on my Birthday</a>
-  <div class="chooseDate">
-    <form class="custom-date" action="/articles/guest">
-      <h3>For someone else? Please enter the date.</h3>
-      <div class="select-date">
-        <select name="year" id="years" class="select"></select>
-        <select name="month" id="months" class="select"></select>
-        <select name="day" id="days" class="select"></select>
-        <button class="go-btn">GO</button>
-      </div>
-    </form>
-  </div>
-<%else%>
-  <div class="index">
-    <h2>Hello!</h2> 
-    <h1 class="welcome">Welcome to WHYB!</h1>
-    <h3 class="pronounced">*(pronounced: <span class="noun">Why-Bee</span>)*</h3>
-    <p>Have you ever wondered about what happened on your birthday 3 years ago?</p> 
-    <p>How about 10 years ago?</p>
-    <p>How about the day that you were born?</p>
-    <p>This is a website where you can view articles that were published on your birthday dating back to your year of birth.</p>
-    <p>Jump in to read blasts from the past!</p>
-  </div>
-  <h2 class="login-btn"><a href="/log_in">Log In</a></h2>
-  <h2 class="signup-btn"><a href="/sign_up">Sign Up</a></h2>
+  <i class="loading fas fa-spinner fa-5x"></i>
 <%end%>
 
+<div class="homepage hidden">
+  <%if logged_in? %>
+    <h3>Some time ago, during one of your birthdays:</h3>
+      <%# <div class="article_content">
+        <h4 class="article-title"></h4> 
+        <p class="date"></p>
+        <p class="result"></p>
+      </div> %>
+
+    <div class="article_container">
+      <form action="/articles/bookmarks" method="post">
+        <input class="article_id" type="hidden" name="article_id"/>
+        <input class="folder_name" type="hidden" name="folder_name"/>
+        <%# <i class="hidden fas fa-birthday-cake fa-2x"></i> %>
+      </form>
+    </div>
+
+    <h2 class="jump-in">Let's Jump in!</h2>
+    <a class="get-my-articles" href="/articles/<%= current_user.id%>">Search articles based on my Birthday</a>
+    <div class="chooseDate">
+      <form class="custom-date" action="/articles/guest">
+        <h3>For someone else? Please enter the date.</h3>
+        <div class="select-date">
+          <select name="year" id="years" class="select"></select>
+          <select name="month" id="months" class="select"></select>
+          <select name="day" id="days" class="select"></select>
+          <button class="go-btn">GO</button>
+        </div>
+      </form>
+  <%else%>
+    <div class="index">
+      <h2>Hello!</h2> 
+      <h1 class="welcome">Welcome to WHYB!</h1>
+      <h3 class="pronounced">*(pronounced: <span class="noun">Why-Bee</span>)*</h3>
+      <p>Have you ever wondered about what happened on your birthday 3 years ago?</p> 
+      <p>How about 10 years ago?</p>
+      <p>How about the day that you were born?</p>
+      <p>This is a website where you can view articles that were published on your birthday dating back to your year of birth.</p>
+      <p>Jump in to read blasts from the past!</p>
+    </div>
+    <h2 class="login-btn"><a href="/log_in">Log In</a></h2>
+    <h2 class="signup-btn"><a href="/sign_up">Sign Up</a></h2>
+  <%end%>
+</div>
 <script src="/javascripts/options.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
@@ -65,7 +68,10 @@
     fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${randomCategory}&fq=pub_date:${randomYear}-${defaultMonth}-${defaultDay}&api-key=xowFFypBoDXFSCp6TjUuwy5mPmY1H6Ra`)
     .then(res => res.json())
     .then(data => {
-      
+      var homepage = document.querySelector('.homepage')
+      var loading = document.querySelector('.loading')
+      homepage.classList.remove('hidden')
+      loading.classList.add('hidden')
       if(data.response.docs[0] !== '' && data.response.docs[0] !== undefined && data.response.docs[0].headline.main !== '' && data.response.docs[0].headline.main !== undefined && data.response.docs[0].snippet !== '') {
         var displayArticle = document.createElement('div');
         displayArticle.classList.add("display-article");
