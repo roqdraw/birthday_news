@@ -28,7 +28,7 @@
   // id("id1" "id2" "id3")
   
   function getArticleById(articleId, bookmarkWrapper) {
-    fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=_id:${articleId}&api-key=xowFFypBoDXFSCp6TjUuwy5mPmY1H6Ra&fbclid=IwAR1sRSz0MFrUI2-x6Vi5m6OlmSQzW2LcU8W_3aU0E3iHLx_z_PKmJCBJRWc`)
+    fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=_id:${articleId}&api-key=hcavVguDcMCwQAflmDvkfZTwMLQDd6pp&fbclid=IwAR1sRSz0MFrUI2-x6Vi5m6OlmSQzW2LcU8W_3aU0E3iHLx_z_PKmJCBJRWc`)
     .then(res => res.json())
     .then(data => {
       var loading = document.querySelector('.loading')
