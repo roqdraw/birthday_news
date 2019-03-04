@@ -5,7 +5,7 @@
   <button>foreign</button>
 </div>
 
-<div class="main">
+<div class="main hidden">
   <p class="previous hidden hidden-arrows"><i class="fas fa-angle-left fa-2x"></i></p>
   <div class="article_container">
     <form action="/articles/bookmarks" method="post">
@@ -38,14 +38,11 @@
     var yearsOfExistence = currentYear - birthYear;
     var counter = 0;
 
-    var apiKey = ''
-
     var getArticles = (category) => {
 
         var getSingleArticle = res => {
-
             var displayDiv = document.querySelector('.display-article')
-
+            
             if ($(".display-article").parents(".article_container").length === 1) {
                 articleContainer.removeChild(displayDiv)
             }
@@ -118,11 +115,13 @@
                     previousYearBtn.classList.remove('hidden')
                 }
             }
-            categories.classList.remove('hidden')
+
+         
+           categories.classList.remove('hidden')  
         }
 
         var options = {
-            url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=uzhiChWGnnVDUYfkdiWIdSA6oXxHyV5I`
+            url: `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${category}&fq=pub_date:${currentYear}-${birthMonth}-${birthDay}&api-key=EXHiMpBT0AdjyWCGX1Gbq7mygBVEMgfr`
         };
 
         console.log('sdfsf',category)
@@ -162,7 +161,6 @@ getArticles("election")
 
     var saveToBookmark = function(e) {
       e.preventDefault()
-      console.log("clicked")
       let folderName = document.querySelector('.article_container .folder_name')
 
       folderName.value = "My Articles"
@@ -170,7 +168,7 @@ getArticles("election")
       const bookmarkForm = document.querySelector('.article_container form')
       fetch(`/api/articles/bookmarks?article_id=${articleId.value}&folder_name=${folderName.value}`, {method: "post"})
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => icon.style.color = "white")
     }
 
     // window.addEventListener('load', getArticles)
