@@ -4,6 +4,7 @@
 @import "/stylesheets/pages/signup.css";
 @import "/stylesheets/pages/bookmark.css";
 @import "/stylesheets/components/button.css";
+@import "/stylesheets/components/banner.css";
 @import "/stylesheets/pages/edit.css";
 @import "/stylesheets/pages/articles.css";
 @import "/stylesheets/components/bookmark_folders.css";
@@ -30,24 +31,11 @@ body{
   overflow: hidden; */
 }
 
-/* .banner h1 {
-  margin: 0;
-} */
-
-/* .header-container {
-  display: flex;
-  flex-direction: row;
-} */
-
 #logo {
   width: 90px;
   height: 90px;
   content: url("/images/whyb_white.png");
 }
-
-/* #logo img {
-  width: 90px;
-} */
 
 .content_wrapper {
   padding: 20px;
@@ -56,6 +44,7 @@ body{
   display: flex;
   justify-content: center;
   height: 100vh;
+  overflow-y: scroll;
   background-size: 100%;
   width: 70%;
   margin: 0 auto;
@@ -79,55 +68,8 @@ a {
   opacity: 0.5;
 }
 
-i:hover {
-  cursor: pointer;
-}
-
-.main-icons {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  text-align: center;
-}
 
 
-.menu-icon {
-  text-decoration: none;
-  color: white;
-  /* transition: 5s;  */
-}
-
-.home-icon, .about-icon {
-  margin: 0 20%;
-}
-
-.home-icon:hover i, .about-icon:hover i {
-  display: none; 
-  transition-delay: 2s; 
-  transition: 1s; 
-}
-
-.home-icon:hover p, .about-icon:hover p{
-  display: block; 
-  transition-delay: 2s;
-  transition: 1s;
-} 
-
-.home-menu, .about-menu {
-  font-family: Arial, Helvetica, sans-serif;
-  color: white;
-  transition-delay: 2s;
-  transition: 1s;
-}
-
-.user-box {
-  display: flex;
-  align-items: center;
-}
-
-.profile-icon {
-  margin: 0 0 0 0.3em;
-}
 .loading {
   color: rgb(17, 71, 102);
   margin-top: 10px;

@@ -1,0 +1,49 @@
+i:hover {
+  cursor: pointer;
+}
+
+.main-icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+}
+
+
+.menu-icon {
+  text-decoration: none;
+  color: white;
+  /* transition: 5s;  */
+}
+
+.home-icon, .about-icon {
+  margin: 0 20%;
+}
+
+.home-icon:hover i, .about-icon:hover i {
+  display: none; 
+  transition-delay: 2s; 
+  transition: 1s; 
+}
+
+.home-icon:hover p, .about-icon:hover p{
+  display: block; 
+  transition-delay: 2s;
+  transition: 1s;
+} 
+
+.home-menu, .about-menu {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  transition-delay: 2s;
+  transition: 1s;
+}
+
+.user-box {
+  display: flex;
+  align-items: center;
+}
+
+.profile-icon {
+  margin: 0 0 0 0.3em;
+}
