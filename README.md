@@ -1,6 +1,6 @@
 # WHYB
 
-https://birthday-news.herokuapp.com/
+Click [here](https://rocky-scrubland-57099.herokuapp.com/) to view the website
 
 ### Technologies Used
 
